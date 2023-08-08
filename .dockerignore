@@ -1,0 +1,7 @@
+#Ignore those folders and files
+
+node_modules
+src
+.env
+*.json
+README.md
