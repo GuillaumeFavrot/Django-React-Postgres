@@ -27,9 +27,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'api.apps.ApiConfig',
     'corsheaders',
-    'pymongo'
 ]
 
 # Here is the list of all domains that are allowed to make a request to the Django app. 

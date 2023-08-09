@@ -9,7 +9,6 @@ Django = "*"
 django-cors-headers = "*"
 dnspython = "*"
 gunicorn = "*"
-pymongo = "*"
 sqlparse = "*"
 whitenoise = "*"
 
