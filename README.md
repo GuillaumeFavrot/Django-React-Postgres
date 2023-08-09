@@ -231,7 +231,6 @@ ENV SECRET_KEY=your_django_secret_key
 ENV MONGO_URI=your_mongo_uri
 
 
-
 # C. Building and running the image
 
 The app is composed of two containers. The main app container and the nginx container. To launch both containers concurrently use the following command :
@@ -242,3 +241,11 @@ To bring the app down use this command :
 
 $ docker-compose down 
 
+
+# MAKING MODEL CHANGES
+
+1) Change your models in models.py
+
+2) Run python manage.py makemigrations
+
+3) Run python manage.py migrate
