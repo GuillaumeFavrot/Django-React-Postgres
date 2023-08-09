@@ -1,10 +1,4 @@
-# DJANGO-REACT-MongoDB Template (Docker edition)
-
-This template has been created as a tool to speed up the process of creation and hosting of a fullstack app.
-
-DISCLAIMER : THIS TEMPLATE HAS BEEN CREATED FOR PERSONNAL USE AS A SIDE PROJECT IT DOES NOT NECESSERILY FEATURES THE BEST DEVLOPMENT PRACTICES. ITS ONLY GOAL IS TO PROVIDE SOME BOILERPLATE CODE FOR A FAST DEPLOYMENT OF A SIMPLE FULLSTACK APP.
-
-
+# DJANGO-REACT-POSTGRES Template
 
 # TEMPLATE SETUP PROCEDURE
 
@@ -12,14 +6,13 @@ This setup procedure is suitable for a freshly cloned folder (from git) on a fre
 
 REQUIREMENTS :
 
-=> PYTHON 3.10.4 OR LATER ;
+=> PYTHON 3.11 OR LATER ;
 
-=> NODE.JS 12.22.9 OR LATER ;
+=> NODE.JS 18.12.1 OR LATER ;
 
-=> NPM 8.15.0 OR LATER ;
+=> NPM 8.19.2 OR LATER ;
 
 All other required packages and dependencies will be installed during the setup process. You'll find the full list of required packages in the requirement.txt and package.json files.
-
 
 
 # A - Environement setup
@@ -31,24 +24,22 @@ A.1 - Django environement setup
 
 It is highly recommended to use this app in a virtual environement to ensure a proper python dependency management :
 
-=>Go in the main app directory and run the command :
+=> Go in the main app directory and run the command :
 
 $ pip3 install pipenv       (if not already installed)
 
 $ pipenv shell
 
-=>Then all the packages the project needs to work have to be installed. The list of theses packages resides in the requirement.txt file (or Pifile see note). To install all packages from the requirement.txt file use the command :
+=> Then install all the packages. The list of theses packages resides in the requirement.txt file (or Pifile see note). To install all packages from the requirement.txt file use the command :
 
 $ pipenv install -r ./requirements.txt
-
-This requirement.txt will be used by Heroku to know which dependencies to install to run your python app.
 
 
 A.2 - Javascript environement setup
 
 All javascript dependencies are listed in the package.json file.
 
-=>To install all javascript dependencies, navigate to the main directory and run the command :
+=>To install all javascript dependencies, navigate to the frontend directory and run the command :
     
 $ npn install
 
@@ -65,13 +56,13 @@ B.1 - Django
 
 => (Option 1) Django developement server 
 
-To launch the Django web server be sure to have the virtual environment up and running then naviguate in the main directory and use the command :
+To launch the Django web server be sure to have the virtual environment up and running then naviguate in the root directory of the app and use the command :
 
 $ python3 manage.py runserver
 
 This command will launch the python server that will be avaiblable at the following address (local) : 127.0.0.1:8000
 
-In this template Django is configured to serve the API via the /api route. It's also configured to serve the React app on the root address however this features requires to generate a live build. Without a live build the root adress (127.0.0.1:8000) leads to nothing. Heroku take care of all the live build creation. However if you want to generate a live build manually, refer to the "manual live build" section of this document.
+This Django template is configured to serve the React app on the root address. However this features requires to generate a react build and a staticfiles folder. See the section about generating a live build for furth instructions
 
 => (Option 2) Gunicorn production server  
 
@@ -92,30 +83,25 @@ The React development environement has it's own webserver accessible via the adr
 
 localhost:3000
 
-In this template Django is configured to serve the React app on its root address however this require  a live build. While on a development build use the localhost address.
-
-
 
 # C - Creation of the .env file
 
-To run this template requires two environement variables, the MONGO_URI to connect to the DB and the DJANGO SECRET. For security reasons those variables are not directly set in the source code of the app. In a devloppement environement they are stored in a .env file and in production they are directly stored in Heroku. This is excluded from the github repository in order not to expose those variables to internet.
-
-So to use the present template it is necessary to :
+This template requires two sets of environement variables, database variables and the DJANGO SECRET.
 
 => Create a .env file at the root of the project ;
 
-=> Add the mongo URI with the following syntaxe :
-
-MONGO_URI=YOUR_MONGO_URI
+=> Add the following DB variables :
+    "NAME": "mydatabase",
+    "USER": "mydatabaseuser",
+    "PASSWORD": "mypassword",
+    "HOST": "db", => This is the name of the DB container
+    "PORT": "5432",
 
 => Generate and add a new Django secret key with the following syntaxe :
 
 SECRET_KEY=YOUR_SECRET_KEY
 
 Note : if a python virtual environement is running DJango may not detect the new .env file. To solve this issue kill the environement and launch it again.
-
-This template is a very simple app that only use two environement variables however more complex apps will use many more (hashing key, token key, etc...)   
-
 
 
 # UPDATING DEPENDENCIES
