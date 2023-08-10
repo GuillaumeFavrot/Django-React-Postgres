@@ -1,3 +1,7 @@
+# Register the models here you want to see in the admin panel.
+
 from django.contrib import admin
 
-# Register your models here.
+from .models import Post 
+
+admin.site.register(Post)
