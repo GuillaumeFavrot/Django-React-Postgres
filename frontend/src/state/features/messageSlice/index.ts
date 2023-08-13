@@ -36,6 +36,7 @@ export const addMessage = createAsyncThunk(
   async (message: Message) => {
     try{
       const response = await api.post(`/posts/add/`, message)
+      console.log('sending post request')
       return JSON.stringify(response)
     }
     catch (e) {

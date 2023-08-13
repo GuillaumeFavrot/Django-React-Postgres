@@ -12,7 +12,6 @@ if(process.env.NODE_ENV === 'development') {
 
 export const api = axios.create({
   baseURL: url,
-  xsrfCookieName: "csrftoken",
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
