@@ -10,7 +10,7 @@
 
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
-import { MessagesState, Message } from '../../../types';
+import { Message } from '../../../types';
 import { RootState } from '../../store';
 import { api } from '../../../api';
 
@@ -36,7 +36,6 @@ export const addMessage = createAsyncThunk(
   async (message: Message) => {
     try{
       const response = await api.post(`/posts/add/`, message)
-      console.log('sending post request')
       return JSON.stringify(response)
     }
     catch (e) {
@@ -55,7 +54,7 @@ export const modifyMessage = createAsyncThunk(
   'messages/modifyMessage',
   async (newMessage: Message) => {
     try {
-      const response = await api.put(`/posts/edit/`, newMessage)
+      const response = await api.put(`/posts/update/`, newMessage)
       return JSON.stringify(response)
     }
     catch (e) {
@@ -68,7 +67,7 @@ export const deleteMessage = createAsyncThunk(
   'messages/deleteTestMessage',
   async (id: number) => {
     try {
-      const response = await api.delete(`/posts/delete/`, {data : {id : id}})
+      const response = await api.delete(`/posts/delete/`, {data : {_id : id}})
       return JSON.stringify(response)
     }
     catch (e) {
@@ -101,7 +100,6 @@ export const messageSlice = createSlice({
       })
       .addCase(getMessages.fulfilled, (state, { payload } ) => {
         let res = JSON.parse(payload)
-        console.log(res.data)
         state.status = 'idle'
         state.statusText = `GET Request ${res.statusText} with status code ${res.status}`
         state.messages = res.data
@@ -147,6 +145,7 @@ export const messageSlice = createSlice({
       })
       .addCase(deleteMessage.fulfilled, (state, { payload } ) => {
         let res = JSON.parse(payload)
+        console.log(res.data)
         state.status = 'idle'
         state.statusText = `DELETE Request ${res.statusText} with status code ${res.status}`
         state.messages = res.data

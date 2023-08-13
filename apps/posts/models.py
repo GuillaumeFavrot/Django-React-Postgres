@@ -6,6 +6,9 @@ class Post(models.Model):
     _id:int = models.AutoField(primary_key=True)
     text: str = models.CharField(max_length=2040)
 
+    def set_text(self, text: str) -> None:
+        self.text = text
+
     def __str__(self) -> str:
         return self.text
     
@@ -17,4 +20,3 @@ class Post(models.Model):
             "_id": self._id,
             "text": self.text
         }
-

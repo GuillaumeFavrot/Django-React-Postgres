@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useAppSelector, useAppDispatch } from '../../hooks'
-import { addMessage, selectStatus, selectMessages, selectStatusText } from '../../state/features/messageSlice'
+import { addMessage, getMessages, selectStatus, selectMessages, selectStatusText } from '../../state/features/messageSlice'
 import MessageList from '../messageList'
 import { Spinner } from '../spinner'
 
@@ -33,6 +33,11 @@ export default function ApiTestForm() {
     setNewMessage('')
   }
 
+  const getPosts = () => {
+    if (messagesStatus === 'idle') {
+      dispatch(getMessages())
+    }
+  }
 
   return (
     <div>
@@ -44,6 +49,7 @@ export default function ApiTestForm() {
         </div>
         <button type="submit" className="btn btn-primary">Submit</button>
       </form>
+      <button onClick={() => getPosts()}>Get posts</button>
       <hr />
       <div>
         <h4 className='text-center w-100'>Server response</h4>

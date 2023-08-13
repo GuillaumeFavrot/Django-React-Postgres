@@ -3,22 +3,39 @@ from django.http import JsonResponse, HttpResponse
 from .models import Post
 from json import loads
 
-
+@csrf_exempt
 class post_crud_controller():
     """This class handles the CRUD operations for posts."""
     
-    def read_all(request):
+    def read_all(request) -> JsonResponse:
         posts = Post.objects.all()
         posts_list = [item.__to_dict__() for item in list(posts)]
         return JsonResponse(posts_list, safe=False)
     
     @csrf_exempt
-    def create(request):
-        data = request.body
-        parsedData = loads(data)
-        text = parsedData['text']
-        post = Post(text=text)
+    def create(request) -> JsonResponse:
+        data = loads(request.body)
+        post = Post(text=data['text'])
         post.save()
+        posts = Post.objects.all()
+        posts_list = [item.__to_dict__() for item in list(posts)]
+        return JsonResponse(posts_list, safe=False)
+    
+    @csrf_exempt
+    def update(request) -> JsonResponse:
+        data = loads(request.body)
+        post = Post.objects.get(_id = data['_id'])
+        post.set_text(data['text'])
+        post.save()
+        posts = Post.objects.all()
+        posts_list = [item.__to_dict__() for item in list(posts)]
+        return JsonResponse(posts_list, safe=False)
+        
+    @csrf_exempt
+    def delete(request) -> JsonResponse:
+        data = loads(request.body)
+        post = Post.objects.get(_id = data['_id'])
+        post.delete()
         posts = Post.objects.all()
         posts_list = [item.__to_dict__() for item in list(posts)]
         return JsonResponse(posts_list, safe=False)
