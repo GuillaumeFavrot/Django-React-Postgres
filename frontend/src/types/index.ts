@@ -1,17 +1,17 @@
 type status = 'idle' | 'loading' | 'failed'
 type statusText = string
 
-export interface Message {
+export interface Post {
     _id?: number,
     text: string,
 }
 
-export interface Messages {
-    messages: Message[]
+export interface Posts {
+    posts: Post[]
 }
 
-export interface MessagesState {
-    messages: Messages
+export interface PostsState {
+    posts: Posts
     status: status
     statusText: statusText
 }

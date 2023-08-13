@@ -1,9 +1,9 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import messageReducer from './features/messageSlice';
+import postReducer from './features/postSlice';
 
 export const store = configureStore({
   reducer: {
-    messages: messageReducer,
+    posts: postReducer,
   },
 });
 

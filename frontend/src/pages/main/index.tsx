@@ -1,5 +1,5 @@
 import React from 'react';
-import ApiTestForm from '../../components/messageForm'
+import ApiTestForm from '../../components/postForm'
 
 
 export default function Main() {

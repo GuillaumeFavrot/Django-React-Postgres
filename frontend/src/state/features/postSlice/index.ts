@@ -10,7 +10,7 @@
 
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
-import { Message } from '../../../types';
+import { Post } from '../../../types';
 import { RootState } from '../../store';
 import { api } from '../../../api';
 
@@ -18,8 +18,8 @@ import { api } from '../../../api';
 // All action creators are rigged to handle basic CRUD operations and throw query errors.
 // Just modify the function and variable names to suit your needs.
 
-export const getMessages = createAsyncThunk(
-  'messages/getMessages',
+export const getPosts = createAsyncThunk(
+  'posts/getPosts',
   async () => {
     try {
       const response = await api.get(`/posts/`)
@@ -31,11 +31,11 @@ export const getMessages = createAsyncThunk(
   }
 )
 
-export const addMessage = createAsyncThunk(
-  'messages/addMessage',
-  async (message: Message) => {
+export const addPost = createAsyncThunk(
+  'posts/addPost',
+  async (post: Post) => {
     try{
-      const response = await api.post(`/posts/add/`, message)
+      const response = await api.post(`/posts/add/`, post)
       return JSON.stringify(response)
     }
     catch (e) {
@@ -50,11 +50,11 @@ export const addMessage = createAsyncThunk(
   }
 )
 
-export const modifyMessage = createAsyncThunk(
-  'messages/modifyMessage',
-  async (newMessage: Message) => {
+export const modifyPost = createAsyncThunk(
+  'posts/modifyPost',
+  async (newPost: Post) => {
     try {
-      const response = await api.put(`/posts/update/`, newMessage)
+      const response = await api.put(`/posts/update/`, newPost)
       return JSON.stringify(response)
     }
     catch (e) {
@@ -63,8 +63,8 @@ export const modifyMessage = createAsyncThunk(
   }
 )
 
-export const deleteMessage = createAsyncThunk(
-  'messages/deleteTestMessage',
+export const deletePost = createAsyncThunk(
+  'post/deletePost',
   async (id: number) => {
     try {
       const response = await api.delete(`/posts/delete/`, {data : {_id : id}})
@@ -83,83 +83,83 @@ export const deleteMessage = createAsyncThunk(
 // All reducers are standard and do not need many modifications except the name of the action creators.
 
 const initialState = {
-  messages: [],
+  posts: [],
   status: 'idle',
   statusText: '',
 }
 
-export const messageSlice = createSlice({
-  name: 'messages',
+export const postSlice = createSlice({
+  name: 'posts',
   initialState: initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
       //GET reducers  
-      .addCase(getMessages.pending, (state) => {
+      .addCase(getPosts.pending, (state) => {
         state.status = 'loading'
       })
-      .addCase(getMessages.fulfilled, (state, { payload } ) => {
+      .addCase(getPosts.fulfilled, (state, { payload } ) => {
         let res = JSON.parse(payload)
         state.status = 'idle'
         state.statusText = `GET Request ${res.statusText} with status code ${res.status}`
-        state.messages = res.data
+        state.posts = res.data
       })
-      .addCase(getMessages.rejected, (state, { error } ) => {
+      .addCase(getPosts.rejected, (state, { error } ) => {
         state.status = 'failed'
         state.statusText = error.message === 'Network Error' ? 'GET request failed with status code 404' : `GET ${error.message}`
       })
 
       //POST reducers
-      .addCase(addMessage.pending, (state) => {
+      .addCase(addPost.pending, (state) => {
         state.status = 'loading'
       })
-      .addCase(addMessage.fulfilled, (state, { payload } ) => {
+      .addCase(addPost.fulfilled, (state, { payload } ) => {
         let res = JSON.parse(payload)
         state.status = 'idle'
         state.statusText = res.status !== 'Null' ? `POST Request ${res.statusText} with status code ${res.status}` : 'POST request failed with status code 404'  
-        state.messages = res.data
+        state.posts = res.data
       })
-      .addCase(addMessage.rejected, (state, { error }) => {
+      .addCase(addPost.rejected, (state, { error }) => {
         state.status = 'failed'
         state.statusText = `POST ${error.message}`
       })
 
       //PUT reducers
-      .addCase(modifyMessage.pending, (state) => {
+      .addCase(modifyPost.pending, (state) => {
         state.status = 'loading'
       })
-      .addCase(modifyMessage.fulfilled, (state, { payload } ) => {
+      .addCase(modifyPost.fulfilled, (state, { payload } ) => {
         let res = JSON.parse(payload)
         state.status = 'idle'
         state.statusText = `PUT Request ${res.statusText} with status code ${res.status}`
-        state.messages = res.data
+        state.posts = res.data
       })
-      .addCase(modifyMessage.rejected, (state, { error }) => {
+      .addCase(modifyPost.rejected, (state, { error }) => {
         state.status = 'failed'
         state.statusText = `PUT ${error.message}`
       })
     
       //DELETE reducers
-      .addCase(deleteMessage.pending, (state) => {
+      .addCase(deletePost.pending, (state) => {
         state.status = 'loading'
       })
-      .addCase(deleteMessage.fulfilled, (state, { payload } ) => {
+      .addCase(deletePost.fulfilled, (state, { payload } ) => {
         let res = JSON.parse(payload)
         state.status = 'idle'
         state.statusText = `DELETE Request ${res.statusText} with status code ${res.status}`
-        state.messages = res.data
+        state.posts = res.data
       })
-      .addCase(deleteMessage.rejected, (state, { error }) => {
+      .addCase(deletePost.rejected, (state, { error }) => {
         state.status = 'failed'
         state.statusText = `DELETE ${error.message}`
       })
   },
 })
 
-export const selectMessages = (state: RootState) => state.messages.messages
-export const selectStatus = (state: RootState) => state.messages.status
-export const selectStatusText = (state: RootState) => state.messages.statusText
+export const selectPosts = (state: RootState) => state.posts.posts
+export const selectStatus = (state: RootState) => state.posts.status
+export const selectStatusText = (state: RootState) => state.posts.statusText
 
 
-const messageReducer = messageSlice.reducer
-export default messageReducer
+const postReducer = postSlice.reducer
+export default postReducer
