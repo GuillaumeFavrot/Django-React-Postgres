@@ -22,7 +22,7 @@ export const getMessages = createAsyncThunk(
   'messages/getMessages',
   async () => {
     try {
-      const response = await api.get(`/api/test`)
+      const response = await api.get(`/posts/`)
       return JSON.stringify(response)
     }
     catch (e) {
@@ -35,7 +35,7 @@ export const addMessage = createAsyncThunk(
   'messages/addMessage',
   async (message: Message) => {
     try{
-      const response = await api.post(`/api/test`, message)
+      const response = await api.post(`/posts/add/`, message)
       return JSON.stringify(response)
     }
     catch (e) {
@@ -54,7 +54,7 @@ export const modifyMessage = createAsyncThunk(
   'messages/modifyMessage',
   async (newMessage: Message) => {
     try {
-      const response = await api.put(`/api/test`, newMessage)
+      const response = await api.put(`/posts/edit/`, newMessage)
       return JSON.stringify(response)
     }
     catch (e) {
@@ -67,7 +67,7 @@ export const deleteMessage = createAsyncThunk(
   'messages/deleteTestMessage',
   async (id: number) => {
     try {
-      const response = await api.delete(`/api/test`, {data : {id : id}})
+      const response = await api.delete(`/posts/delete/`, {data : {id : id}})
       return JSON.stringify(response)
     }
     catch (e) {
@@ -100,6 +100,7 @@ export const messageSlice = createSlice({
       })
       .addCase(getMessages.fulfilled, (state, { payload } ) => {
         let res = JSON.parse(payload)
+        console.log(res.data)
         state.status = 'idle'
         state.statusText = `GET Request ${res.statusText} with status code ${res.status}`
         state.messages = res.data

@@ -1,23 +1,23 @@
-from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse, HttpResponse
+from .models import Post
+from json import loads
 
 
 class post_crud_controller():
     """This class handles the CRUD operations for posts."""
-
-    def create(request):
-        return HttpResponse("Hello, world. You hit the posts controler.")
-
+ 
     def read_all(request):
-        return HttpResponse("Hello, world. You hit the posts read all controler.")
-
-    def read_one(request):
-        return HttpResponse("Hello, world. You hit the posts read controler.")
+        posts = Post.objects.all()
+        posts_list = [item.__to_dict__() for item in list(posts)]
+        return JsonResponse(posts_list, safe=False)
     
-    def update(request):
-        return HttpResponse("Hello, world. You hit the posts update controler.")
-    
-    def delete(request):
-        return HttpResponse("Hello, world. You hit the posts delete controler.")
-    
-
-    
+    def create(request):
+        data = request.body
+        parsedData = loads(data)
+        text = parsedData['text']
+        post = Post(text=text)
+        post.save()
+        posts = Post.objects.all()
+        posts_list = [item.__to_dict__() for item in list(posts)]
+        return JsonResponse(posts_list, safe=False)

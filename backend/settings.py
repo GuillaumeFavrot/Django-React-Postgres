@@ -1,3 +1,5 @@
+
+
 """
 Django settings for backend project.
 
@@ -25,10 +27,17 @@ load_dotenv(os.path.join(BASE_DIR, '.env'))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '0.0.0.0']
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = True
+
+# Here is the list of all domains that are allowed to make a request to the Django app. 
+# In thiscase, the only domain allowed to make a request is http://localhost:3000, which is the devlopment React app.
+ALLOWED_HOSTS = ['127.0.0.1', '0.0.0.0', 'localhost']
+CORS_ALLOWED_ORIGINS= ['http://localhost:3000']
+CORS_ALLOW_HEADERS= ['*']
+CORS_ALLOW_CREDENTIALS = True
+
 
 # Application definition
 
@@ -43,12 +52,6 @@ INSTALLED_APPS = [
     'corsheaders',
 ]
 
-# Here is the list of all domains that are allowed to make a request to the Django app. 
-# In this case, the only domain allowed to make a request is http://localhost:3000, which is the devlopment React app.
-
-CORS_ALLOWED_ORIGINS = []
-
-
 
 MIDDLEWARE = [
     # The following line is part of the custom corsheaders setup
@@ -58,11 +61,12 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    #'django.middleware.csrf.CsrfViewMiddleware', # This middleware completely blocks react from interracting with the backend // No workaround found to this day
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
 
 # The following line is part of the custom whitenoise setup
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
@@ -113,7 +117,6 @@ else :
         }
     }
     # This line allows the react dev webserver to interract freely with the flask webserver. Which is useless in prod since every file is served though flask 
-    CORS_ORIGIN_ALLOW_ALL = True
 
 
 
