@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { useAppSelector, useAppDispatch } from '../../hooks'
 import { addMessage, getMessages, selectStatus, selectMessages, selectStatusText } from '../../state/features/messageSlice'
 import MessageList from '../messageList'
-import { Spinner } from '../spinner'
 
 
 export default function ApiTestForm() {
@@ -15,12 +14,12 @@ export default function ApiTestForm() {
   const dispatch = useAppDispatch()
   
 
-  let content: JSX.Element | string = "Failed to load messages"
+  let content: string = "Failed to load messages"
 
   if (messagesStatus === 'loading') {
-    content = <Spinner text="Loading..." />
+    content = "Loading..."
   } else if (messagesStatus === 'idle') {
-    content = <MessageList messages={messages} />     
+    content =  messagesStatusText    
   }
 
   function onMessageChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -53,10 +52,10 @@ export default function ApiTestForm() {
       <hr />
       <div>
         <h4 className='text-center w-100'>Server response</h4>
-        <p className='text-center w-100'>{messagesStatusText}</p>
+        <p className='text-center w-100'>{content}</p>
       </div>
       <hr />
-      {content}
+      <MessageList messages={messages} />
     </div>
   )
 }

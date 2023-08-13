@@ -145,7 +145,6 @@ export const messageSlice = createSlice({
       })
       .addCase(deleteMessage.fulfilled, (state, { payload } ) => {
         let res = JSON.parse(payload)
-        console.log(res.data)
         state.status = 'idle'
         state.statusText = `DELETE Request ${res.statusText} with status code ${res.status}`
         state.messages = res.data
