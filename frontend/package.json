@@ -25,10 +25,13 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --transformIgnorePatterns 'node_modules/(?!axios)/'",
+    "test": "react-scripts test --coverage --watchAll --transformIgnorePatterns 'node_modules/(?!axios)/'",
+    "test-clear-cache": "react-scripts test --clearCache",
     "eject": "react-scripts eject"
   },
-  "jest": {},
+  "jest": {
+
+  },
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -48,6 +51,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@types/js-cookie": "^3.0.3"
   }
 }

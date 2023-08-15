@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 type status = 'idle' | 'loading' | 'failed'
 type statusText = string
 

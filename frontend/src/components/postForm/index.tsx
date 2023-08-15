@@ -44,7 +44,7 @@ export default function PostForm() {
       <form onSubmit={(e)=>{onSubmit(e)}} className='d-flex flex-column justify-content-center'>
         <div className="mb-3">
           <label className="form-label text-center">Enter your test post</label>
-          <input onChange ={(e)=>onPostChange(e)} type="testPst" className="form-control" id="testPost" value={newPost}></input>
+          <input onChange ={(e)=>onPostChange(e)} type="testPst" className="form-control" id="testPost" value={newPost} data-testid="Input"></input>
         </div>
         <button type="submit" className="btn btn-primary">Submit</button>
       </form>
