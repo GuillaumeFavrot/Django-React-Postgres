@@ -7,7 +7,6 @@ export default function PostList({ posts }: Posts) {
         <>
             {posts.map((post: Post) => (
                 <PostComponent key={post._id} _id={post._id} text={post.text}/>
-
             ))}
         </>
     );
