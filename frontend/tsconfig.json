@@ -18,9 +18,10 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+
+
+    "jsx": "react"
   },
   "include": [
-    "src/**/**/*"
-  ]
+    "src/**/**/*", "../tests/PostForm.test.tsx", "../tests/PostList.test.tsx", "../tests/postSlice.test.ts", "../tests/Post.test.tsx", "../tests/Main.test.tsx", "../tests/App.test.tsx"]
 }
