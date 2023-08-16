@@ -14,6 +14,8 @@ const dummyPost: Post = { _id: 1, text: 'First post' }
 
 let component: any;
 
+//Unit tests
+
 describe('PostComponent', () => {
     beforeEach(() => {
         component = render(
@@ -63,6 +65,42 @@ describe('PostComponent', () => {
         });
 })
 
+//Integration tests
 
+describe('PostComponent', () => {
+    beforeEach(() => {
+        component = render(
+            <Provider store={store}>
+                <PostComponent key={dummyPost._id} _id={dummyPost._id} text={dummyPost.text}/>
+            </Provider>
+        );
 
+        const cssFile = fs.readFileSync(
+            path.resolve(__dirname, '../../assets/App.css'),
+            'utf8'
+        )
+        
+        const { container } = component
+        
+        const style = document.createElement('style')
+        style.type = 'text/css'
+        style.innerHTML = cssFile
+        container.append(style)
+
+        //I must create a post in this section
+
+    });
+
+    it('The user can update a posts message', async () => {
+        //The user clicks a posts message to reveal the modification form
+        //The user types a new message in the input field
+        //The user clicks the submit button
+        //Expectation : The post is updated
+    });
+    
+    it('The user can delete a post', async () => {
+        //The user clicks the delete button of a particular post
+        //Expectation : The post is deleted
+    });
+})    
 
