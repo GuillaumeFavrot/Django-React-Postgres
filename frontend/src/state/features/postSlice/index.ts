@@ -66,7 +66,6 @@ export const modifyPost = createAsyncThunk(
 export const deletePost = createAsyncThunk(
   'post/deletePost',
   async (id: number) => {
-    console.log(id)
     try {
       const response = await api.delete(`/posts/delete/`, {data : {_id : id}})
       return JSON.stringify(response)

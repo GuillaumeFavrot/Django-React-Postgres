@@ -14,6 +14,7 @@
     "@types/redux-mock-store": "^1.0.3",
     "axios": "^1.4.0",
     "js-cookie": "^3.0.5",
+    "puppeteer": "^18.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.1.2",
@@ -25,13 +26,12 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --coverage --watchAll --transformIgnorePatterns 'node_modules/(?!axios)/'",
+    "test": "react-scripts test --coverage --watchAll --transformIgnorePatterns 'node_modules/(?!axios)/' --testPathIgnorePatterns=src/tests/*e2e.test.ts",
+    "test:e2e": "react-scripts test --runInBand --testPathPattern=src/tests/*e2e.test.ts$",
     "test-clear-cache": "react-scripts test --clearCache",
     "eject": "react-scripts eject"
   },
-  "jest": {
-
-  },
+  "jest": {},
   "eslintConfig": {
     "extends": [
       "react-app",
