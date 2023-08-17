@@ -57,7 +57,7 @@ describe('PostComponent', () => {
     
     it('The text typed by the user in the input field is properly catched and saved in local state', async () => {
         const user = userEvent.setup()
-        const input = component.getByTestId("Input");
+        const input = component.getByTestId("PostInput");
         await act( async () => {
             await user.type(input, "Entered text")
         })
