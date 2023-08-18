@@ -53,6 +53,7 @@ export const addPost = createAsyncThunk(
 export const modifyPost = createAsyncThunk(
   'posts/modifyPost',
   async (newPost: Post) => {
+    console.log(newPost)
     try {
       const response = await api.put(`/posts/update/`, newPost)
       return JSON.stringify(response)
