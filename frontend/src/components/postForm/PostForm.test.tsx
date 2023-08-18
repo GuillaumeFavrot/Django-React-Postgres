@@ -30,11 +30,11 @@ describe('PostForm', () => {
     
     it('The text typed by the user in the input field is properly catched and saved in local state', async () => {
         const user = userEvent.setup()
-        const input = component.getByTestId("NewMessageInput");
+        const input = component.getByLabelText('post-add-input');
         await act( async () => {
-            await user.type(input, "Entered text")
+            await user.type(input, 'Entered text')
         })
-        expect(input.value).toBe("Entered text");
+        expect(input.value).toBe('Entered text');
         });
 
 })

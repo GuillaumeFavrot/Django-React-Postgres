@@ -17,7 +17,7 @@ test('API Tester title', async () => {
             <PostList posts={dummyPosts} />
         </Provider>
     );
-    const postList = screen.queryAllByTestId("post");
+    const postList = screen.queryAllByLabelText("post");
     expect(postList).toHaveLength(3);
 });
 

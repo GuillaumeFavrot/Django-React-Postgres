@@ -21,14 +21,14 @@ describe('PostComponent', () => {
     
     it('The user can click on "get posts" button to retrieve all posts and see them displayed on the screen', async () => {
         //The user clicks on "get posts"
-        const getPostsButton = PostFormTestComponent.queryByTestId('Get-posts')
+        const getPostsButton = PostFormTestComponent.queryByLabelText('get-all-posts')
         await act( async () => {
             await fireEvent.click(getPostsButton);
             await new Promise((r) => setTimeout(r, 500));
         })
         //Expectation : All posts are requested from the database and displayed on the screen or
         // If no posts are found, a message "No post available" is displayed on the screen as well as a "GET Request OK with status code 200" status message
-        const postList = screen.queryAllByTestId("post");
+        const postList = screen.queryAllByLabelText("post");
         let result;
         if (postList.length > 0) {
             result = true;
@@ -44,7 +44,7 @@ describe('PostComponent', () => {
     it('The user can create a new post and see it displayed on the screen', async () => {
         //The user types a new post in the input field
         const user = userEvent.setup()
-        const input = PostFormTestComponent.getByTestId("NewMessageInput");
+        const input = PostFormTestComponent.getByLabelText("post-add-input");
         await act( async () => {
             await user.type(input, "New Post")
         })
@@ -61,12 +61,12 @@ describe('PostComponent', () => {
     it('The user can update a posts message', async () => {
         //The user types a new message in the input field
         const user = userEvent.setup()
-        const input = screen.getByTestId("PostInput");
+        const input = screen.getByLabelText("post-update-input");
         await act( async () => {
             await user.type(input, "Corrected post")
         })
         //The user clicks the submit button
-        const inputSubmit = screen.getByTestId("InputSubmit");
+        const inputSubmit = screen.getByLabelText("post-update-submit");
         await act( async () => {
             await fireEvent.click(inputSubmit);
             await new Promise((r) => setTimeout(r, 500));
