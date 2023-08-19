@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { useAppSelector, useAppDispatch } from '../../hooks'
 import { addPost, getPosts, selectStatus, selectPosts, selectStatusText } from '../../state/features/postSlice'
 import PostList from '../postList'
-import { Posts } from '../../types'
 
 
 export default function PostForm() {
