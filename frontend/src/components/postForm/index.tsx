@@ -1,33 +1,37 @@
 import React, { useState } from 'react'
-import { useAppSelector, useAppDispatch } from '../../hooks'
-import { addPost, getPosts, selectStatus, selectPosts, selectStatusText } from '../../state/features/postSlice'
+import { useAppDispatch } from '../../hooks'
+import { addPost, } from '../../state/features/postSlice'
 import PostList from '../postList'
+import { useGetPostsQuery } from '../../state/api'
 
 
 export default function PostForm() {
 
-  const posts = useAppSelector(selectPosts)
-  const postsStatus = useAppSelector(selectStatus)
-  const postsStatusText = useAppSelector(selectStatusText)
-  
   const [newPost, setNewPost] = useState('')
   const dispatch = useAppDispatch()
-  
+
+  const { data: posts, isLoading, isSuccess, isError, error } = useGetPostsQuery()
 
   let content: string = "Failed to load posts"
-
-  if (postsStatus === 'loading') {
-    content = "Loading..."
-  } else if (postsStatus === 'idle') {
-    content =  postsStatusText    
-  }
-
   let postContent: JSX.Element | string = "No post available in DB"
 
-  if (posts.length > 0) {
-    postContent = <PostList posts={posts}/>
+  if (isLoading) {
+    content = "Loading..."
+  } else if (isSuccess) {
+    content =  "Get request successfull"
+    postContent = <PostList posts={posts}/>   
+  } else if (isError) {
+    let statusCode : string = ''
+    let errorStatus : string = ''
+    if (error && 'status' in error) {
+      errorStatus = error.status.toString()
+    }
+    if (error && 'originalStatus' in error) {
+      statusCode = error.originalStatus.toString()
+    }
+    content = `${errorStatus} with status code : ${statusCode}`
   }
-
+  
   function onPostChange(e: React.ChangeEvent<HTMLInputElement>) {
     setNewPost(e.target.value)
   }
@@ -36,12 +40,6 @@ export default function PostForm() {
     e.preventDefault()
     dispatch(addPost({text : newPost}))
     setNewPost('')
-  }
-
-  const getAllPosts = () => {
-    if (postsStatus === 'idle') {
-      dispatch(getPosts())
-    }
   }
 
   return (
@@ -54,7 +52,6 @@ export default function PostForm() {
         </div>
         <button type="submit" className="" aria-label="post-add-submit">Submit</button>
       </form>
-      <button onClick={() => getAllPosts()} className="" aria-label="get-all-posts">Get posts</button>
       <hr />
       <div>
         <h4 className='text-center w-100'>Server response</h4>

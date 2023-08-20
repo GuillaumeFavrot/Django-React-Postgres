@@ -46,7 +46,6 @@ export default function PostComponent({_id, text}: Post) {
 
   return (
     <div className='mb-2' aria-label="post" >
-      <h6>Post : </h6> 
       <form className=''>
         <div className='' >
           <a onClick={(e) => postDeleteRequest(e)} className="" type="submit" href="/" aria-label='post-delete'>

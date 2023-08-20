@@ -18,19 +18,6 @@ import { api } from '../../../api';
 // All action creators are rigged to handle basic CRUD operations and throw query errors.
 // Just modify the function and variable names to suit your needs.
 
-export const getPosts = createAsyncThunk(
-  'posts/getPosts',
-  async () => {
-    try {
-      const response = await api.get(`/posts/`)
-      return JSON.stringify(response)
-    }
-    catch (e) {
-      throw(e)
-    }
-  }
-)
-
 export const addPost = createAsyncThunk(
   'posts/addPost',
   async (post: Post) => {
@@ -94,21 +81,6 @@ export const postSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      //GET reducers  
-      .addCase(getPosts.pending, (state) => {
-        state.status = 'loading'
-      })
-      .addCase(getPosts.fulfilled, (state, { payload } ) => {
-        let res = JSON.parse(payload)
-        state.status = 'idle'
-        state.statusText = `GET Request ${res.statusText} with status code ${res.status}`
-        state.posts = res.data
-      })
-      .addCase(getPosts.rejected, (state, { error } ) => {
-        state.status = 'failed'
-        state.statusText = error.message === 'Network Error' ? 'GET request failed with status code 404' : `GET ${error.message}`
-      })
-
       //POST reducers
       .addCase(addPost.pending, (state) => {
         state.status = 'loading'
