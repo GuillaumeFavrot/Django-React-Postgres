@@ -1,8 +1,8 @@
 import React from 'react';
 import PostComponent from '../post';
-import { Post, Posts } from '../../types';
+import { Post, PostsProp } from '../../types';
 
-export default function PostList({ posts }: Posts) {
+export default function PostList({ posts }: PostsProp) {
     return (
         <>
             {posts.map((post: Post) => (

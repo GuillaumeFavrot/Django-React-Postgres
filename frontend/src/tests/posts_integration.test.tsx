@@ -4,35 +4,32 @@ import { render, fireEvent, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event'
 import { Provider } from 'react-redux';
 import { store } from '../state/store';
-import PostForm from '../components/postForm';
 import { act } from 'react-dom/test-utils';
+import Main from '../pages/main';
 
-let PostFormTestComponent: any;
+let MainTestComponent: any;
 
 describe('PostComponent', () => {
 
     beforeEach(() => {        
-        PostFormTestComponent = render(
+        MainTestComponent = render(
             <Provider store={store}>
-                <PostForm />
+                <Main />
             </Provider>
         );
     });
     
-    it('The user can click on "get posts" button to retrieve all posts and see them displayed on the screen', async () => {
-        //The user clicks on "get posts"
-        const getPostsButton = PostFormTestComponent.queryByLabelText('get-all-posts')
-        await act( async () => {
-            await fireEvent.click(getPostsButton);
-            await new Promise((r) => setTimeout(r, 500));
-        })
+    it('All posts are fetched uppon page load', async () => {
         //Expectation : All posts are requested from the database and displayed on the screen or
         // If no posts are found, a message "No post available" is displayed on the screen as well as a "GET Request OK with status code 200" status message
+        await act( async () => {
+            await new Promise((r) => setTimeout(r, 500));
+        })
         const postList = screen.queryAllByLabelText("post");
         let result;
         if (postList.length > 0) {
             result = true;
-        } else if (screen.getByText("No post available in DB") && screen.getByText("GET Request OK with status code 200")) {
+        } else if (screen.getByText("No post available in DB") && screen.getByText("Get request successfull")) {
             result = true;
         } else {
             result = false;
@@ -44,12 +41,12 @@ describe('PostComponent', () => {
     it('The user can create a new post and see it displayed on the screen', async () => {
         //The user types a new post in the input field
         const user = userEvent.setup()
-        const input = PostFormTestComponent.getByLabelText("post-add-input");
+        const input = MainTestComponent.getByLabelText("post-add-input");
         await act( async () => {
             await user.type(input, "New Post")
         })
         //The user clicks on "create post"
-        const submitButton = PostFormTestComponent.getByText("Submit")
+        const submitButton = MainTestComponent.getByText("Submit")
         await act( async () => {
             await fireEvent.click(submitButton);
             await new Promise((r) => setTimeout(r, 500));

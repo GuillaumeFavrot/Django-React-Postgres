@@ -3,14 +3,24 @@ import '@testing-library/jest-dom'
 import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { store } from '../../state/store';
-import PostForm from './index';
+import Main from './index';
 
-test('Should properly render the DOM tree and display the "API Tester" title', () => {
-  const { getByText } = render(
-    <Provider store={store}>
-      <PostForm />
-    </Provider>
-  );
+let component: any;
 
-  expect(getByText(/API Tester/i)).toBeInTheDocument();
-});
+describe('Main', () => {
+  beforeEach(() => {
+      component = render(
+          <Provider store={store}>
+              <Main />
+          </Provider>
+      );
+  });
+
+  it('Should properly render the DOM tree and display the "API Tester" title', () => {
+    expect(component.getByText(/API Tester/i)).toBeInTheDocument();
+  });
+
+  it('Should properly display the "Loading..." text when the page is loading', () => {
+    expect(component.getByText("Loading...")).toBeInTheDocument();
+  })
+})

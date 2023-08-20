@@ -37,7 +37,6 @@ describe("App.js", () => {
     it("Update a post", async () => {
         await page.goto("http://localhost:3000");
         await page.waitForSelector('h1[aria-label="main-title"]');
-        await page.click('button[aria-label="get-all-posts"]');
         await new Promise((r) => setTimeout(r, 500));
         await page.waitForSelector('p[aria-label="post-text"]');
         await page.click('p[aria-label="post-text"]');
@@ -53,7 +52,6 @@ describe("App.js", () => {
     it('Delete a post', async () => {
         await page.goto('http://localhost:3000');
         await page.waitForSelector('h1[aria-label="main-title"]');
-        await page.click('button[aria-label="get-all-posts"]');
         await new Promise((r) => setTimeout(r, 500));
         await page.waitForSelector('p[aria-label="post-text"]');
         await page.click('a[aria-label="post-delete"]');

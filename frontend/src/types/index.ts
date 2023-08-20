@@ -7,7 +7,9 @@ export interface Post {
     text: string,
 }
 
-export interface Posts {
+export type Posts = Post[]
+
+export interface PostsProp {
     posts: Post[]
 }
 

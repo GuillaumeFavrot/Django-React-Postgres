@@ -2,6 +2,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse, HttpResponse
 from .models import Post
 from json import loads
+import time
 
 @csrf_exempt
 class post_crud_controller():
@@ -13,29 +14,23 @@ class post_crud_controller():
         return JsonResponse(posts_list, safe=False)
     
     @csrf_exempt
-    def create(request) -> JsonResponse:
+    def create(request) -> HttpResponse:
         data = loads(request.body)
         post = Post(text=data['text'])
         post.save()
-        posts = Post.objects.all()
-        posts_list = [item.__to_dict__() for item in list(posts)]
-        return JsonResponse(posts_list, safe=False)
+        return HttpResponse(status=200)
     
     @csrf_exempt
-    def update(request) -> JsonResponse:
+    def update(request) -> HttpResponse:
         data = loads(request.body)
         post = Post.objects.get(_id = data['_id'])
         post.set_text(data['text'])
         post.save()
-        posts = Post.objects.all()
-        posts_list = [item.__to_dict__() for item in list(posts)]
-        return JsonResponse(posts_list, safe=False)
+        return HttpResponse(status=200)
         
     @csrf_exempt
-    def delete(request) -> JsonResponse:
+    def delete(request) -> HttpResponse:
         data = loads(request.body)
-        post = Post.objects.get(_id = data['_id'])
+        post = Post.objects.get(_id = data)
         post.delete()
-        posts = Post.objects.all()
-        posts_list = [item.__to_dict__() for item in list(posts)]
-        return JsonResponse(posts_list, safe=False)
+        return HttpResponse(status=200)
