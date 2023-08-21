@@ -25,11 +25,11 @@ describe('PostComponent', () => {
         await act( async () => {
             await new Promise((r) => setTimeout(r, 500));
         })
-        const postList = screen.queryAllByLabelText("post");
+        const postList = screen.queryAllByLabelText('post');
         let result;
         if (postList.length > 0) {
             result = true;
-        } else if (screen.getByText("No post available in DB") && screen.getByText("Get request successfull")) {
+        } else if (screen.getByText('No post available in DB') && screen.getByText('Get request successfull')) {
             result = true;
         } else {
             result = false;
@@ -41,45 +41,45 @@ describe('PostComponent', () => {
     it('The user can create a new post and see it displayed on the screen', async () => {
         //The user types a new post in the input field
         const user = userEvent.setup()
-        const input = MainTestComponent.getByLabelText("post-add-input");
+        const input = MainTestComponent.getByLabelText('post-add-input');
         await act( async () => {
-            await user.type(input, "New Post")
+            await user.type(input, 'New Post')
         })
         //The user clicks on "create post"
-        const submitButton = MainTestComponent.getByText("Submit")
+        const submitButton = MainTestComponent.getByText('Submit')
         await act( async () => {
             await fireEvent.click(submitButton);
             await new Promise((r) => setTimeout(r, 500));
         })
         //Expectation : The new post is created in the database and displayed on the screen
-        expect(screen.getByText("New Post")).toBeInTheDocument();
+        expect(screen.getByText('New Post')).toBeInTheDocument();
     });
 
     it('The user can update a posts message', async () => {
         //The user types a new message in the input field
         const user = userEvent.setup()
-        const input = screen.getByLabelText("post-update-input");
+        const input = screen.getByLabelText('post-update-input');
         await act( async () => {
-            await user.type(input, "Corrected post")
+            await user.type(input, 'Corrected post')
         })
         //The user clicks the submit button
-        const inputSubmit = screen.getByLabelText("post-update-submit");
+        const inputSubmit = screen.getByLabelText('post-update-submit');
         await act( async () => {
             await fireEvent.click(inputSubmit);
             await new Promise((r) => setTimeout(r, 500));
         })
         //Expectation : The post is updated
-        expect(screen.getByText("Corrected post")).toBeInTheDocument();
+        expect(screen.getByText('Corrected post')).toBeInTheDocument();
     });
     
     it('The user can delete a post', async () => {
         //The user clicks the delete button of a particular post
-        const deleteButton = screen.getByText("Corrected post").previousSibling
+        const deleteButton = screen.getByText('Corrected post').previousSibling
         await act( async () => {
             await fireEvent.click(deleteButton as Element);
             await new Promise((r) => setTimeout(r, 500));
         })
         //Expectation : The post is deleted
-        expect(screen.queryByText("Corrected post")).not.toBeInTheDocument();
+        expect(screen.queryByText('Corrected post')).not.toBeInTheDocument();
     });
 })  

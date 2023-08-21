@@ -30,13 +30,13 @@ export default function PostForm() {
 
   return (
     <div>
-      <h1 className='' aria-label="main-title">API Tester</h1>
-      <form onSubmit={(e)=>{onSubmit(e)}} className='d-flex flex-column justify-content-center'>
-        <div className="mb-3">
-          <label className="">Enter your test post</label>
-          <input onChange ={(e)=>onPostChange(e)} type="testPost" className="" id="testPost" aria-label="post-add-input" value={newPost}></input>
+      <h1 className='' aria-label='main-title'>API Tester</h1>
+      <form onSubmit={(e)=>{onSubmit(e)}} className=''>
+        <div className=''>
+          <label className=''>Enter your test post</label>
+          <input onChange ={(e)=>onPostChange(e)} type='testPost' className='' id='testPost' aria-label='post-add-input' value={newPost}></input>
         </div>
-        <button type="submit" className="" aria-label="post-add-submit">Submit</button>
+        <button type='submit' className='' aria-label='post-add-submit'>Submit</button>
       </form>
     </div>
   )

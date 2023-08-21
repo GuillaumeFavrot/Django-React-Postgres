@@ -11,18 +11,18 @@ export default function Main() {
 
   
   //Post content setup
-  let content: string = "Failed to load posts"
-  let postContent: JSX.Element | string = "No post available in DB"
+  let content: string = 'Failed to load posts'
+  let postContent: JSX.Element | string = 'No post available in DB'
 
   if (isLoading) {
-    content = "Loading..."
+    content = 'Loading...'
   } 
   
   else if (isSuccess) {
     if (posts && posts.length > 0) {
         postContent = <PostList posts={posts}/>
       }
-    isFetching ? content = "Updating..." : content = "Get request successfull"
+    isFetching ? content = 'Updating...' : content = 'Get request successfull'
   } 
   
   else if (isError) {
@@ -45,10 +45,10 @@ export default function Main() {
       <hr />
       <div>
         <h4 >Server response</h4>
-        <p className='text-center w-100'>{content}</p>
+        <p className=''>{content}</p>
       </div>
       <hr />
-      <div className={isFetching ? "disabled" : ""}>{postContent}</div>
+      <div className={isFetching ? 'disabled' : ''}>{postContent}</div>
     </div>
   )
 }

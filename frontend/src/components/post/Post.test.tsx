@@ -43,12 +43,12 @@ describe('PostComponent', () => {
         });
 
     it('should display the post delete button', () => {
-        const deleteLink = component.queryByLabelText("post-delete");
+        const deleteLink = component.queryByLabelText('post-delete');
         expect(deleteLink).toBeInTheDocument();
         });  
     
     it('The modification form should be hidden from the start then appear on click', () => {
-        const modifyLink = component.queryByLabelText("post-update");
+        const modifyLink = component.queryByLabelText('post-update');
         expect(modifyLink).not.toBeVisible();
         const postText = component.getByText(dummyPost.text);
         fireEvent.click(postText);
@@ -57,11 +57,11 @@ describe('PostComponent', () => {
     
     it('The text typed by the user in the input field is properly catched and saved in local state', async () => {
         const user = userEvent.setup()
-        const input = component.getByLabelText("post-update-input");
+        const input = component.getByLabelText('post-update-input');
         await act( async () => {
-            await user.type(input, "Entered text")
+            await user.type(input, 'Entered text')
         })
-        expect(input.value).toBe("Entered text");
+        expect(input.value).toBe('Entered text');
         });
 })
 

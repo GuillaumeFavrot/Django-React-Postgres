@@ -21,6 +21,6 @@ describe('Main', () => {
   });
 
   it('Should properly display the "Loading..." text when the page is loading', () => {
-    expect(component.getByText("Loading...")).toBeInTheDocument();
+    expect(component.getByText('Loading...')).toBeInTheDocument();
   })
 })
