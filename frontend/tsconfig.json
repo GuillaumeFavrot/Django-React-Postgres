@@ -23,5 +23,5 @@
     "jsx": "react"
   },
   "include": [
-    "src/**/**/*", "../tests/PostForm.test.tsx", "../tests/PostList.test.tsx", "../tests/postSlice.test.ts", "../tests/Post.test.tsx", "../tests/Main.test.tsx", "../tests/App.test.tsx", "src/components/postForm/PostForm.test.tsx", "src/tests/posts_integration.test.tsx"]
+    "src/**/**/*", "../tests/PostForm.test.tsx", "../tests/PostList.test.tsx", "../tests/postSlice.test.ts", "../tests/Post.test.tsx", "../tests/Main.test.tsx", "../tests/App.test.tsx", "src/components/postForm/PostForm.test.tsx", "src/tests/posts_integration.test.tsx", "tailwind.config.js"]
 }

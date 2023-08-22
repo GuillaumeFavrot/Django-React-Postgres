@@ -40,12 +40,12 @@ export default function Main() {
 
 
   return (
-    <div className=''>
+    <div >
       <ApiTestForm />
       <hr />
       <div>
-        <h4 >Server response</h4>
-        <p className=''>{content}</p>
+        <h4 className='text-3xl font-bold underline'>Server response</h4>
+        <p>{content}</p>
       </div>
       <hr />
       <div className={isFetching ? 'disabled' : ''}>{postContent}</div>

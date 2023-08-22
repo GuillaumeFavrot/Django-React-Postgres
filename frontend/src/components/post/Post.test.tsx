@@ -23,18 +23,6 @@ describe('PostComponent', () => {
                 <PostComponent key={dummyPost._id} _id={dummyPost._id} text={dummyPost.text}/>
             </Provider>
         );
-
-        const cssFile = fs.readFileSync(
-            path.resolve(__dirname, '../../assets/App.css'),
-            'utf8'
-        )
-        
-        const { container } = component
-        
-        const style = document.createElement('style')
-        style.type = 'text/css'
-        style.innerHTML = cssFile
-        container.append(style)
     });
 
     it('should display the post text', () => {
@@ -49,10 +37,10 @@ describe('PostComponent', () => {
     
     it('The modification form should be hidden from the start then appear on click', () => {
         const modifyLink = component.queryByLabelText('post-update');
-        expect(modifyLink).not.toBeVisible();
+        expect(modifyLink).toHaveClass('hidden');
         const postText = component.getByText(dummyPost.text);
         fireEvent.click(postText);
-        expect(modifyLink).toBeVisible();
+        expect(modifyLink).toHaveClass('flex');
         });
     
     it('The text typed by the user in the input field is properly catched and saved in local state', async () => {

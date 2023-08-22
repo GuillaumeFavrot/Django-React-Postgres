@@ -1,92 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /*
 This app uses Bootstrap for quick CSS formatting however if specific custom CSS rules are needed they can be added in the present file.  
 If a rule written in this file does not properly apply to the app it's because bootstrap rules usually take priority.
 To override this default behavior add '!important' at the end of a rule to give it priority.
 */
 
-.application {
-  min-height: 100vh;
+
+.d-none {
+  display: none;
 }
 
-.header {
-  height: 70px;
+.d-flex {
+  display: flex;
 }
 
-.footer {
-  height: 55px;
-}
-
-.body {
-  flex-grow: 1;
-  padding-top: 70px;
-}
-
-h1 {
-  font-size: 30px !important;
-}
-
-.bold {
-  font-weight: bold;
-}
-
-.page {
-  flex-grow: 1;
-  padding: 10px;
-}
-
-btn-footer {
-  margin: 0px;
-  padding: 0px;
-}
-
-.bi {
-  margin-bottom: 2px;
-}
-
-.heading {
-  text-align: center;
-  background-color: green;
-}
-
-.btn-table {
-  margin: 0px;
-  padding: 0px;
-  width: 100%;
-  height: 20px;
-  background: none;
-  border: none;
-}
-
-.info-card {
-  width: 80%;
-}
-
-.info-card-title {
-  width: 20%;
-}
-
-.info-table-content {
-  width: 70%;
-  flex-flow: 1;
-}
-
-.info-card-btn {
-  width: 10%;
-}
-
-.modal-list {
-  border: 0px !important;
-}
-
-.payment-card-title {
-  width: 80%;
-}
-
-.payment-table-content {
-  width: 20%;
-  flex-flow: 1;
-}
-
-.big {
-  font-size: 1.3rem;
+.disabled {
+  pointer-events: none;
+  opacity: 0.4;
 }

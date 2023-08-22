@@ -57,7 +57,7 @@ export default function PostComponent({_id, text}: Post) {
           <p onClick={() => setToModification()} className={postFormState === 'display' ? 'mb-0 d-block' : 'd-none'} aria-label="post-text">
             {text}
           </p>
-          <div className={postFormState === 'display' ? 'd-none' : 'd-flex'} aria-label='post-update'>
+          <div className={postFormState === 'display' ? 'hidden' : 'flex'} aria-label='post-update'>
             <input onChange={(e) => onPostChange(e)} className='' value={newPost} aria-label='post-update-input'/>
             <a onClick={(e) => postModificationRequest(e)} className='' type='submit' href='/' aria-label='post-update-submit'>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-check" viewBox="0 0 16 16">
