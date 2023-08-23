@@ -9,3 +9,5 @@ export type Posts = Post[]
 export interface PostsProp {
     posts: Post[]
 }
+
+export type statusStringType = string

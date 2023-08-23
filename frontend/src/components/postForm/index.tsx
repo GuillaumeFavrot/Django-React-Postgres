@@ -30,7 +30,6 @@ export default function PostForm() {
 
   return (
     <div>
-      <h1 className='' aria-label='main-title'>API Tester</h1>
       <form onSubmit={(e)=>{onSubmit(e)}} className=''>
         <div className=''>
           <label className=''>Enter your test post</label>

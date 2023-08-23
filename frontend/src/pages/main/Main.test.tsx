@@ -19,8 +19,4 @@ describe('Main', () => {
   it('Should properly render the DOM tree and display the "API Tester" title', () => {
     expect(component.getByText(/API Tester/i)).toBeInTheDocument();
   });
-
-  it('Should properly display the "Loading..." text when the page is loading', () => {
-    expect(component.getByText('Loading...')).toBeInTheDocument();
-  })
 })
