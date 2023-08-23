@@ -30,7 +30,6 @@ export default function PostComponent({_id, text}: Post) {
 				await deletePostMutation(_id).unwrap()
                 dispatch(updateRequestStatus('200', 'DELETE request successful'))
 			} catch (err) {
-				console.error('Failed to delete the post: ', err)
 				const processed_error = requestErrorHandler(err as FetchBaseQueryError)
                 dispatch(updateRequestStatus(processed_error['statusCode'], processed_error['statusText'] ))
 			}

@@ -17,5 +17,18 @@ export type requestStatusPayload = {
 
 export interface modificationFormProps {
     _id: number | undefined
-    setToDisplay: () => void
+    setToDisplay: Function
+}
+
+export interface buttonProps {
+    content : string | React.JSX.Element
+    onClickFunction: Function
+    ariaLabel: string
+}
+
+export interface simpleFormProps {
+    label: string
+    onSubmitFunction: Function
+    ariaLabel: string
+    buttonContent: string | React.JSX.Element
 }
