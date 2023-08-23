@@ -2,7 +2,6 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse, HttpResponse
 from .models import Post
 from json import loads
-import time
 
 @csrf_exempt
 class post_crud_controller():

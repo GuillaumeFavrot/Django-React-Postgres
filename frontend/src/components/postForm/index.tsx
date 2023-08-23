@@ -1,11 +1,15 @@
 import React, { useState } from 'react'
 import { useAddPostMutation } from '../../state/features/api'
+import requestErrorHandler from '../../utils/requestErrorHandler';
+import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
+import { useAppDispatch } from '../../hooks'
+import { updateRequestStatus } from '../../state/features/requestStatus'
 
 
 export default function PostForm() {
 
   //Add post mutation hook setup
-  const [addPostMutation, { isLoading }] = useAddPostMutation()
+  const [addPostMutation, { isLoading, error }] = useAddPostMutation()
 
   //Local state setup
   const [newPost, setNewPost] = useState('')
@@ -15,6 +19,9 @@ export default function PostForm() {
     setNewPost(e.target.value)
   }
 
+  //useAppDispatch hook setup
+  const dispatch = useAppDispatch()
+
   //Add post mutation submit function
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -22,8 +29,11 @@ export default function PostForm() {
       try {
         await addPostMutation({text: newPost}).unwrap()
         setNewPost('')
+        dispatch(updateRequestStatus('200', 'POST request successful'))     
       } catch (err) {
         console.error('Failed to save the post: ', err)
+        const processed_error = requestErrorHandler(error as FetchBaseQueryError)
+        dispatch(updateRequestStatus(processed_error['statusCode'], processed_error['statusText'] ))
       }
     }
   }

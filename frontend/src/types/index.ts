@@ -10,4 +10,12 @@ export interface PostsProp {
     posts: Post[]
 }
 
-export type statusStringType = string
+export type requestStatusPayload = {
+    statusString: string,
+    statusCode: string,
+}
+
+export interface modificationFormProps {
+    _id: number | undefined
+    setToDisplay: () => void
+}
