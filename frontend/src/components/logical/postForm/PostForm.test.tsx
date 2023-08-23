@@ -3,9 +3,9 @@ import '@testing-library/jest-dom'
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event'
 import { Provider } from 'react-redux';
-import { store } from '../../state/store';
+import { store } from '../../../state/store';
 import PostForm from './index';
-import { Post } from '../../types';
+import { Post } from '../../../types';
 import { act } from 'react-dom/test-utils';
 
 const dummyPost: Post = { _id: 1, text: 'First post' }

@@ -1,16 +1,16 @@
 import React, { useState } from 'react'
-import { Post } from '../../types'
-import { useDeletePostMutation } from '../../state/features/api'
+import { Post } from '../../../types'
+import { useDeletePostMutation } from '../../../state/features/api'
 import PostModificationForm from '../postModificationForm'
-import { useAppDispatch } from '../../hooks'
-import { updateRequestStatus } from '../../state/features/requestStatus'
-import requestErrorHandler from '../../utils/requestErrorHandler';
+import { useAppDispatch } from '../../../hooks'
+import { updateRequestStatus } from '../../../state/features/requestStatus'
+import requestErrorHandler from '../../../utils/requestErrorHandler';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
 
 export default function PostComponent({_id, text}: Post) {
 
 	//Delete post mutation hooks setup
-	const [deletePostMutation, {error}] = useDeletePostMutation()
+	const [deletePostMutation] = useDeletePostMutation()
 
 	//Local state setup
 	const [postFormState, setPostFormState] = useState('display')
@@ -31,7 +31,7 @@ export default function PostComponent({_id, text}: Post) {
                 dispatch(updateRequestStatus('200', 'DELETE request successful'))
 			} catch (err) {
 				console.error('Failed to delete the post: ', err)
-				const processed_error = requestErrorHandler(error as FetchBaseQueryError)
+				const processed_error = requestErrorHandler(err as FetchBaseQueryError)
                 dispatch(updateRequestStatus(processed_error['statusCode'], processed_error['statusText'] ))
 			}
 		}

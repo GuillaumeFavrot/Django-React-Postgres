@@ -1,7 +1,7 @@
 import React from 'react';
-import PostForm from '../../components/postForm'
-import RequestStatusComponent from '../../components/serverResponseComponent';
-import PostList from '../../components/postList';
+import PostForm from '../../components/logical/postForm'
+import RequestStatusComponent from '../../components/logical/serverResponseComponent';
+import PostList from '../../components/logical/postList';
 
 
 export default function Main() {

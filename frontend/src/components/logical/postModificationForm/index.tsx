@@ -1,16 +1,16 @@
 import React, { useState } from 'react'
-import { useUpdatePostMutation } from '../../state/features/api'
-import { modificationFormProps } from '../../types'
-import { useAppDispatch } from '../../hooks'
-import { updateRequestStatus } from '../../state/features/requestStatus'
-import requestErrorHandler from '../../utils/requestErrorHandler';
+import { useUpdatePostMutation } from '../../../state/features/api'
+import { modificationFormProps } from '../../../types'
+import { useAppDispatch } from '../../../hooks'
+import { updateRequestStatus } from '../../../state/features/requestStatus'
+import requestErrorHandler from '../../../utils/requestErrorHandler';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
 
 
 function PostModificationForm({_id, setToDisplay}: modificationFormProps) {
 
     //Update post mutation hooks setup
-    const [updatePostMutation, {error}] = useUpdatePostMutation()
+    const [updatePostMutation] = useUpdatePostMutation()
 
     //Local state setup
     const [newPost, setNewPost] = useState('')
@@ -32,7 +32,7 @@ function PostModificationForm({_id, setToDisplay}: modificationFormProps) {
                 setNewPost('') 
             } catch (err) {
                 console.error('Failed to update the post: ', err)
-                const processed_error = requestErrorHandler(error as FetchBaseQueryError)
+                const processed_error = requestErrorHandler(err as FetchBaseQueryError)
                 dispatch(updateRequestStatus(processed_error['statusCode'], processed_error['statusText'] ))
             }
 		}

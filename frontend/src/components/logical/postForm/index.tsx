@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
-import { useAddPostMutation } from '../../state/features/api'
-import requestErrorHandler from '../../utils/requestErrorHandler';
+import { useAddPostMutation } from '../../../state/features/api'
+import requestErrorHandler from '../../../utils/requestErrorHandler';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
-import { useAppDispatch } from '../../hooks'
-import { updateRequestStatus } from '../../state/features/requestStatus'
+import { useAppDispatch } from '../../../hooks'
+import { updateRequestStatus } from '../../../state/features/requestStatus'
 
 
 export default function PostForm() {
 
   //Add post mutation hook setup
-  const [addPostMutation, { isLoading, error }] = useAddPostMutation()
+  const [addPostMutation, { isLoading }] = useAddPostMutation()
 
   //Local state setup
   const [newPost, setNewPost] = useState('')
@@ -31,8 +31,7 @@ export default function PostForm() {
         setNewPost('')
         dispatch(updateRequestStatus('200', 'POST request successful'))     
       } catch (err) {
-        console.error('Failed to save the post: ', err)
-        const processed_error = requestErrorHandler(error as FetchBaseQueryError)
+        const processed_error = requestErrorHandler(err as FetchBaseQueryError)
         dispatch(updateRequestStatus(processed_error['statusCode'], processed_error['statusText'] ))
       }
     }

@@ -1,6 +1,6 @@
 import React from 'react'
-import { useAppSelector } from '../../hooks'
-import { selectStatusString } from '../../state/features/requestStatus'
+import { useAppSelector } from '../../../hooks'
+import { selectStatusString } from '../../../state/features/requestStatus'
 
 function RequestStatusComponent() {
 

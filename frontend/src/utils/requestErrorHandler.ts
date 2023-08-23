@@ -4,6 +4,8 @@ export default function requestErrorHandler(error: FetchBaseQueryError) {
     let statusCode = '';
     let statusText = '';
 
+    console.log(error)
+
     //Handles basic non typed errors
     if (typeof error.status === 'number') {
         statusCode = error.status.toString();

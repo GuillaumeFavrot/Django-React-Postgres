@@ -1,10 +1,10 @@
 import React from 'react';
 import PostComponent from '../post';
-import { Post } from '../../types';
-import { useGetPostsQuery } from '../../state/features/api'
-import { useAppDispatch, useAppSelector } from '../../hooks'
-import { selectStatus, updateRequestStatus } from '../../state/features/requestStatus'
-import requestErrorHandler from '../../utils/requestErrorHandler';
+import { Post } from '../../../types';
+import { useGetPostsQuery } from '../../../state/features/api'
+import { useAppDispatch, useAppSelector } from '../../../hooks'
+import { selectStatus, updateRequestStatus } from '../../../state/features/requestStatus'
+import requestErrorHandler from '../../../utils/requestErrorHandler';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
 
 export default function PostList() {
