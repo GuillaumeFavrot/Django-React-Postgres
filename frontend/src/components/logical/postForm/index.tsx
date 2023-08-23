@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useAddPostMutation } from '../../../state/features/api'
 import requestErrorHandler from '../../../utils/requestErrorHandler';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
 import { useAppDispatch } from '../../../hooks'
 import { updateRequestStatus } from '../../../state/features/requestStatus'
+import SimpleForm from '../../utility/simpleForm';
 
 
 export default function PostForm() {
@@ -11,24 +12,14 @@ export default function PostForm() {
   //Add post mutation hook setup
   const [addPostMutation, { isLoading }] = useAddPostMutation()
 
-  //Local state setup
-  const [newPost, setNewPost] = useState('')
-
-  //Local state update function
-  function onPostChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setNewPost(e.target.value)
-  }
-
   //useAppDispatch hook setup
   const dispatch = useAppDispatch()
 
   //Add post mutation submit function
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    if ([newPost].every(Boolean) && !isLoading) {
+  const onSubmit = async (data: string) => {
+    if (!isLoading) {
       try {
-        await addPostMutation({text: newPost}).unwrap()
-        setNewPost('')
+        await addPostMutation({text: data}).unwrap()
         dispatch(updateRequestStatus('200', 'POST request successful'))     
       } catch (err) {
         const processed_error = requestErrorHandler(err as FetchBaseQueryError)
@@ -38,14 +29,6 @@ export default function PostForm() {
   }
 
   return (
-    <div>
-      <form onSubmit={(e)=>{onSubmit(e)}} className=''>
-        <div className=''>
-          <label className=''>Enter your test post</label>
-          <input onChange ={(e)=>onPostChange(e)} type='testPost' className='' id='testPost' aria-label='post-add-input' value={newPost}></input>
-        </div>
-        <button type='submit' className='' aria-label='post-add-submit'>Submit</button>
-      </form>
-    </div>
+      <SimpleForm label='Enter your test post' onSubmitFunction={onSubmit} ariaLabel='post-add' buttonContent='Submit'/>
   )
 }
