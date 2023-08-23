@@ -1,3 +1,51 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .container {
+        @apply mx-auto;
+    }
+
+    .card {
+        @apply container;
+        border-radius: theme('borderRadius.lg');
+        padding: theme('spacing.6');
+        box-shadow: theme('boxShadow.xl');
+    }
+
+    .card-title {
+        @apply text-2xl font-bold text-center mb-2;
+    }
+
+    .simple-form {
+        @apply container flex flex-col my-2;
+    }
+
+    .form-group {
+        @apply mb-1 flex;
+    }
+
+    .form-title {
+        @apply block mb-1 text-center font-bold;
+    }
+
+    .form-input {
+        @apply block w-full p-1 mr-1;
+        border-radius: theme('borderRadius.md');
+        border: 1px solid theme('colors.gray.300');
+    }
+
+    .btn {
+        @apply block p-1 rounded-md;
+        width: fit-content;
+    }
+
+    .btn-primary {
+        @apply bg-blue-950 text-white;
+    }
+
+    .btn-danger {
+        @apply bg-red-900 text-white;
+    }
+}

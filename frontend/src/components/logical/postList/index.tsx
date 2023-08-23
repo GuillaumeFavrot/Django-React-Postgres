@@ -61,7 +61,7 @@ export default function PostList() {
 
     return (
         <>
-            <p className={isFetching ? 'opacity-40' : ''}>{postContent}</p>
+            <div className={isFetching ? 'opacity-40' : ''}>{postContent}</div>
         </>
     );
 }

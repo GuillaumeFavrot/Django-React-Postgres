@@ -24,10 +24,11 @@ export interface buttonProps {
     content : string | React.JSX.Element
     onClickFunction: Function
     ariaLabel: string
+    color?: string
 }
 
 export interface simpleFormProps {
-    label: string
+    title: string
     onSubmitFunction: Function
     ariaLabel: string
     buttonContent: string | React.JSX.Element

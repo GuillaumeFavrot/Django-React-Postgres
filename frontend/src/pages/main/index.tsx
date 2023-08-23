@@ -9,9 +9,9 @@ export default function Main() {
     return (
 		<div className='h-screen w-screen flex items-center bg-slate-600'>
 			
-				<div className="container mx-auto bg-slate-500">
+				<div className="bg-slate-500 max-w-lg card">
 				
-					<h1 className='text-3xl font-bold' aria-label='main-title'>API Tester</h1>
+					<h1 className='card-title' aria-label='main-title'>API Tester</h1>
 					
 					<hr />
 					

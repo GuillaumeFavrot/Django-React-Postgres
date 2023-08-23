@@ -29,6 +29,6 @@ export default function PostForm() {
   }
 
   return (
-      <SimpleForm label='Enter your test post' onSubmitFunction={onSubmit} ariaLabel='post-add' buttonContent='Submit'/>
+      <SimpleForm title='Enter your test post' onSubmitFunction={onSubmit} ariaLabel='post-add' buttonContent='Submit'/>
   )
 }

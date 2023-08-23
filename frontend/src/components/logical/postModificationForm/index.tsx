@@ -36,7 +36,7 @@ function PostModificationForm({_id, setToDisplay}: modificationFormProps) {
         </svg>
 
     return (
-        <SimpleForm label='' onSubmitFunction={postModificationRequest} ariaLabel='post-update' buttonContent={buttonContent}/>
+        <SimpleForm title='' onSubmitFunction={postModificationRequest} ariaLabel='post-update' buttonContent={buttonContent}/>
     )
 }
 

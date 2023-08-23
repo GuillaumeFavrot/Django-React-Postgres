@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Button from '../button'
 import { simpleFormProps } from '../../../types'
 
-function SimpleForm({label, onSubmitFunction, ariaLabel, buttonContent}: simpleFormProps) {            
+function SimpleForm({title, onSubmitFunction, ariaLabel, buttonContent}: simpleFormProps) {            
 
     //Local state setup
     const [data, setData] = useState('')
@@ -20,11 +20,13 @@ function SimpleForm({label, onSubmitFunction, ariaLabel, buttonContent}: simpleF
     }
 
     return (
-        <div className=''>  
-            <label className=''>{label}</label>
-            <input onChange={(e) => onPostChange(e)} className='' value={data} aria-label='post-update-input'/>
-            <Button content={buttonContent} onClickFunction={submit} ariaLabel={buttonAriaLabel}/>
-        </div>
+        <div className='simple-form'>
+            <h4 className='form-title'>{title}</h4>
+            <div className='form-group'>
+                <input onChange={(e) => onPostChange(e)} className='form-input' value={data} aria-label='post-update-input'/>
+                <Button content={buttonContent} onClickFunction={submit} ariaLabel={buttonAriaLabel}/>
+            </div>
+        </div> 
     )
 }
 

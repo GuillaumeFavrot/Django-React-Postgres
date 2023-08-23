@@ -6,6 +6,7 @@ import { useAppDispatch } from '../../../hooks'
 import { updateRequestStatus } from '../../../state/features/requestStatus'
 import requestErrorHandler from '../../../utils/requestErrorHandler';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
+import Button from '../../utility/button'
 
 export default function PostComponent({_id, text}: Post) {
 
@@ -23,8 +24,7 @@ export default function PostComponent({_id, text}: Post) {
 	const dispatch = useAppDispatch()
 	
 	//Post deletion function
-	const postDeletionRequest = async (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-		e.preventDefault()
+	const postDeletionRequest = async () => {
 		if (typeof _id !== 'undefined') {
 			try {
 				await deletePostMutation(_id).unwrap()
@@ -36,25 +36,22 @@ export default function PostComponent({_id, text}: Post) {
 		}
 	}
 
+	let buttonContent = <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash" viewBox="0 0 16 16">
+							<path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
+							<path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
+						</svg>
+
 	return (
 		<div className='' aria-label="post" >
-			<form className=''>
-				<div className='' >
-					<a onClick={(e) => postDeletionRequest(e)} className='' type='submit' href='/' aria-label='post-delete'>
-						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash" viewBox="0 0 16 16">
-						<path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
-						<path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
-						</svg>
-					</a>
-					<p onClick={() => setToModification()} className={postFormState === 'display' ? 'mb-0 d-block' : 'd-none'} aria-label="post-text">
-						{text}
-					</p>
-					<div className={postFormState === 'display' ? 'hidden' : 'flex'} aria-label='post-update'>
-						<PostModificationForm _id={_id} setToDisplay={setToDisplay}/>
-					</div>
-				</div>
-			</form>
-			<hr />
+			<div className={postFormState === 'display' ? 'flex py-3' : 'hidden'}>
+				<Button color='danger' content={buttonContent} onClickFunction={postDeletionRequest} ariaLabel='post-delete'/>
+				<p className='ml-3' onClick={() => setToModification()} aria-label="post-text">{text}</p>
+			</div>
+			<div className={postFormState === 'display' ? 'hidden' : 'flex'} aria-label='post-update'>
+				<PostModificationForm _id={_id} setToDisplay={setToDisplay}/>
+			</div>
+		<hr />	
 		</div>
+		
 	)
 }

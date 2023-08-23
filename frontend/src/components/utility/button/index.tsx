@@ -1,10 +1,30 @@
 import React from 'react'
 import { buttonProps } from '../../../types'
 
-function Button({content, onClickFunction, ariaLabel}: buttonProps) {
-    
+function Button({color, content, onClickFunction, ariaLabel}: buttonProps) {
+
+    let className: string;
+
+    switch (color) {
+        case 'secondary':
+            className = 'btn btn-secondary'
+            break;
+        case 'success':
+            className = 'btn btn-success'
+            break;
+        case 'danger':
+            className = 'btn btn-danger'
+            break;
+        case 'warning':
+            className = 'btn btn-warning'
+            break;
+        default:
+            className = 'btn btn-primary'
+            break;
+    }
+
     return (
-        <button className='' onClick={() => onClickFunction()} aria-label={ariaLabel}>
+        <button className={className} onClick={() => onClickFunction()} aria-label={ariaLabel}>
                 {content}
         </button>
     )
