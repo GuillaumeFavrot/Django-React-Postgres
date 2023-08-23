@@ -5,15 +5,9 @@ import userEvent from '@testing-library/user-event'
 import { Provider } from 'react-redux';
 import { store } from '../../../state/store';
 import PostForm from './index';
-import { Post } from '../../../types';
 import { act } from 'react-dom/test-utils';
 
-const dummyPost: Post = { _id: 1, text: 'First post' }
-
 let component: any;
-
-
-// Unit tests
 
 describe('PostForm', () => {
     beforeEach(() => {
@@ -24,8 +18,8 @@ describe('PostForm', () => {
         );
     });
 
-    it('Should render properly and display "API Tester"', () => {
-        expect(component.getByText(/API Tester/i)).toBeInTheDocument();
+    it('Should render properly and display "Enter your test post"', () => {
+        expect(component.getByText(/Enter your test post/i)).toBeInTheDocument();
         });
     
     it('The text typed by the user in the input field is properly catched and saved in local state', async () => {
@@ -35,7 +29,7 @@ describe('PostForm', () => {
             await user.type(input, 'Entered text')
         })
         expect(input.value).toBe('Entered text');
-        });
+    });
 
 })
 

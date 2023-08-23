@@ -22,8 +22,8 @@ export interface modificationFormProps {
 
 export interface buttonProps {
     content : string | React.JSX.Element
-    onClickFunction: Function
-    ariaLabel: string
+    onClickFunction?: Function
+    ariaLabel?: string
     color?: string
 }
 

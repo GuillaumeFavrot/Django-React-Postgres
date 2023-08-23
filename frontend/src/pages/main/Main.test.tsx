@@ -8,15 +8,15 @@ import Main from './index';
 let component: any;
 
 describe('Main', () => {
-  beforeEach(() => {
-      component = render(
-          <Provider store={store}>
-              <Main />
-          </Provider>
-      );
-  });
+    beforeEach(() => {
+        component = render(
+            <Provider store={store}>
+                <Main />
+            </Provider>
+        );
+    });
 
-  it('Should properly render the DOM tree and display the "API Tester" title', () => {
-    expect(component.getByText(/API Tester/i)).toBeInTheDocument();
-  });
+    it('Should properly render the DOM tree and display the "API Tester" title', () => {
+      	expect(component.getByText(/API Tester/i)).toBeInTheDocument();
+    });
 })

@@ -4,8 +4,6 @@ export default function requestErrorHandler(error: FetchBaseQueryError) {
     let statusCode = '';
     let statusText = '';
 
-    console.log(error)
-
     //Handles basic non typed errors
     if (typeof error.status === 'number') {
         statusCode = error.status.toString();
@@ -14,12 +12,6 @@ export default function requestErrorHandler(error: FetchBaseQueryError) {
         }  else {
             statusText = 'No message provided';
         }
-    }
-
-    //Handles undefined errors
-    if (error.status === undefined || error.status === 'CUSTOM_ERROR') {
-        statusCode = 'Unknown';
-        statusText = 'Unknown';
     }
 
     //Handles 'FETCH_ERROR' errors
@@ -39,6 +31,12 @@ export default function requestErrorHandler(error: FetchBaseQueryError) {
         statusCode = '408';
         statusText = 'Request timed out';
     }
-
+    
+    //Handles custom errors
+    if (error.status === 'CUSTOM_ERROR') {
+        statusCode = 'Unknown';
+        statusText = error.error.toString();
+    }
+    
     return {statusCode, statusText};
 }

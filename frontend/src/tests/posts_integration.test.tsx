@@ -11,6 +11,16 @@ let MainTestComponent: any;
 
 describe('PostComponent', () => {
 
+    const originalWarn = console.warn.bind(console.warn)
+
+    beforeAll(() => {
+        console.warn = (msg) => !msg.toString().includes('Warning: Cannot update a component') && originalWarn(msg)
+    })
+
+    afterAll(() => {
+        console.warn = originalWarn
+    })
+
     beforeEach(() => {        
         MainTestComponent = render(
             <Provider store={store}>
@@ -29,7 +39,7 @@ describe('PostComponent', () => {
         let result;
         if (postList.length > 0) {
             result = true;
-        } else if (screen.getByText('No post available in DB') && screen.getByText('Get request successfull')) {
+        } else if (screen.getByText('No post available in DB') && screen.getByText('200: GET request successful')) {
             result = true;
         } else {
             result = false;

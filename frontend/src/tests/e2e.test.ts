@@ -42,7 +42,7 @@ describe("App.js", () => {
         await page.click('p[aria-label="post-text"]');
         await page.click('input[aria-label="post-update-input"]');
         await page.type('input[aria-label="post-update-input"]', "Updated Post");
-        await page.click('a[aria-label="post-update-submit"]');
+        await page.click('button[aria-label="post-update-submit"]');
         await new Promise((r) => setTimeout(r, 500));
         await page.waitForSelector('p[aria-label="post-text"]');
         const text3 = await page.$eval('p[aria-label="post-text"]', (e: Element) => e.textContent);
@@ -54,7 +54,7 @@ describe("App.js", () => {
         await page.waitForSelector('h1[aria-label="main-title"]');
         await new Promise((r) => setTimeout(r, 500));
         await page.waitForSelector('p[aria-label="post-text"]');
-        await page.click('a[aria-label="post-delete"]');
+        await page.click('button[aria-label="post-delete"]');
         expect(screen.queryByText('Updated Post')).not.toBeInTheDocument();
     })
 

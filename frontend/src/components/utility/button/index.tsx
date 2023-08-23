@@ -22,9 +22,15 @@ function Button({color, content, onClickFunction, ariaLabel}: buttonProps) {
             className = 'btn btn-primary'
             break;
     }
+    
+    const trigger = () => {
+        if (onClickFunction) {
+            onClickFunction()
+        }
+    }
 
     return (
-        <button className={className} onClick={() => onClickFunction()} aria-label={ariaLabel}>
+        <button type='submit' className={className} onClick={() => trigger()} aria-label={ariaLabel}>
                 {content}
         </button>
     )

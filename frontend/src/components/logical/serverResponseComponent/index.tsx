@@ -4,7 +4,7 @@ import { selectStatusString } from '../../../state/features/requestStatus'
 
 function RequestStatusComponent() {
 
-    //Retrieval of the requests status string from the app state
+    //Retrieval of the requests status string from the app states
     const statusString = useAppSelector(selectStatusString)
 
     return (

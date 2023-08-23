@@ -27,7 +27,7 @@ export default function PostForm() {
       }
     }
   }
-
+  
   return (
       <SimpleForm title='Enter your test post' onSubmitFunction={onSubmit} ariaLabel='post-add' buttonContent='Submit'/>
   )

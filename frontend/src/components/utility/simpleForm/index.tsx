@@ -14,19 +14,21 @@ function SimpleForm({title, onSubmitFunction, ariaLabel, buttonContent}: simpleF
     const buttonAriaLabel = `${ariaLabel}-submit`
 
     //Onsubmit function setup
-    const submit = () => {
+    const submit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
         onSubmitFunction(data)
         setData('') //Reset local state
     }
 
+
     return (
-        <div className='simple-form'>
+        <form className='simple-form' role='form' onSubmit={(e) => submit(e)}>
             <h4 className='form-title'>{title}</h4>
             <div className='form-group'>
-                <input onChange={(e) => onPostChange(e)} className='form-input' value={data} aria-label='post-update-input'/>
-                <Button content={buttonContent} onClickFunction={submit} ariaLabel={buttonAriaLabel}/>
+                <input onChange={(e) => onPostChange(e)} className='form-input' value={data} aria-label={`${ariaLabel}-input`}/>
+                <Button content={buttonContent} ariaLabel={buttonAriaLabel}/>
             </div>
-        </div> 
+        </form> 
     )
 }
 
