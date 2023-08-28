@@ -78,7 +78,7 @@ This Django template is configured to serve the React UI on the root address. Ho
 
 Django's administration interface is accessible on the following address : 127.0.0.1:8000/admin/
 
-In order to access it you first need to create a new superuser with the following command :
+![#0c4b33]In order to access it you first need to create a new superuser with the following command :
 
 ```
 python manage.py createsuperuser
