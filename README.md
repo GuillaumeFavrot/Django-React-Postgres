@@ -1,75 +1,92 @@
-# DJANGO-REACT-POSTGRES Template
+# ![#0c4b33]DJANGO-REACT-POSTGRES Template
 
-## TEMPLATE SETUP PROCEDURE
+## ![#0c4b33]TEMPLATE SETUP PROCEDURE
 
-REQUIREMENTS :
+Requirements :
++ PYTHON 3.1.12 or later ;
++ NODE.JS 18.17.1 or later ;
++ NPM 9.6.7 or later ;
 
-=> PYTHON 3.11 OR LATER ;
-
-=> NODE.JS 18.12.1 OR LATER ;
-
-=> NPM 8.19.2 OR LATER ;
-
-### A - Environement setup
+### ![#0c4b33]A - Environement setup
 
 Upon downloading of this template the first step is to ensure the correct environment is set up.
 
 
-#### A.1 - Django environement setup
+#### ![#0c4b33]A.1 - Django environement setup
 
-It is highly recommended to use this app in a virtual environement to ensure a proper python dependency management :
+It is highly recommended to use this app in a virtual environement to ensure a proper python dependency management.
 
-=> Go in the main app directory and run the command :
+All python packages are listed in the requirements.txt file
+
+In the root directory of the app run the following commands :
 
 ```
-pip3 install pipenv       (if not already installed)
+pip3 install pipenv
 pipenv shell
+pipenv install -r ./requirements.txt
 ```
 
-=> Then install all the packages. The list of theses packages resides in the requirement.txt file (or Pifile see note). To install all packages from the requirement.txt file use the command :
 
-$ pipenv install -r ./requirements.txt
-
-
-#### A.2 - Javascript environement setup
+#### ![#0c4b33]A.2 - Javascript environement setup
 
 All javascript dependencies are listed in the package.json file.
 
-=>To install all javascript dependencies, navigate to the frontend directory and run the command :
-    
-$ npn install
+In the frontend directory of the app run the following command :
 
-This command will install all dependencies listed in the package.json file
+```  
+npn install
+```
 
+#### ![#0c4b33]A.3 - Creating the .env file
 
+In the root directory of the app, create a .env file to store the following environment variables :
 
-# B - Launching the developpement environement
+```
+#Django secret key
 
-Both Django and React have their own develpmentevironement that need to be launched in order tu run the code.
+SECRET_KEY="your secret key"
+ALLOWED_ORIGINS=http://localhost:3000 http://127.0.0.1:3000 http://localhost:8000 http://127.0.0.1:8000 http://localhost
+ALLOWED_HOSTS=0.0.0.0 127.0.0.1
 
+# Database variables
 
-B.1 - Django
-
-=> (Option 1) Django developement server 
-
-To launch the Django web server be sure to have the virtual environment up and running then naviguate in the root directory of the app and use the command :
-
-$ python3 manage.py runserver
-
-This command will launch the python server that will be avaiblable at the following address (local) : 127.0.0.1:8000
-
-This Django template is configured to serve the React app on the root address. However this features requires to generate a react build and a staticfiles folder. See the section about generating a live build for furth instructions
-
-=> (Option 2) Gunicorn production server  
-
-Although gunicorn will be used as a production server it is possible to use it instead of the stock Django dev server.
-
-To launch the gunicorn server for production use the following command in the root directory of the app :
-
-$ gunicorn backend.wsgi:application --bind 0.0.0.0:8000
+SQL_HOST=db
+SQL_PORT=5432
+DATABASE=postgres
+POSTGRES_USER=username
+POSTGRES_PASSWORD=password
+POSTGRES_DB=dbname 
+DATABASE_URL=postgresql://username:password@db:5432/dbname
+```
 
 
-B.2 - React
+### ![#0c4b33]B - Launching a developpement environement
+
+#### ![#0c4b33]B.1 - Django
+
+If the virtual environment is running, packages are installed and envirments variables are setup, launch Django's devlopment web-server with the following command
+
+```
+python3 manage.py runserver
+```
+
+This command will launch the python server that will be avaiblable locally on the loopback address : 127.0.0.1:8000
+
+This Django template is configured to serve the React UI on the root address. However this requires to generate a react build and a staticfiles folder. See the section about generating a build for further instructions.
+
+##### ![#0c4b33]Django's administration interface
+
+Django's administration interface is accessible on the following address : 127.0.0.1:8000/admin/
+
+In order to access it you first need to create a new superuser with the following command :
+
+```
+python manage.py createsuperuser
+```
+
+This step however requires a working database. See database setup for further instructions.
+
+#### ![#0c4b33]B.2 - React
 
 To launch the react devlopment environment simply use the following command in the main directory :
 

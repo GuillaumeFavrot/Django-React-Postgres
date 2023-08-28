@@ -14,8 +14,8 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# List of all host/domain names that Django can serve. 
-ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1']
+# List of all host/domain names that Django can serve.
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
 
 # Here is the list of all domains that are allowed to make a request to the Django app. 
 # In thiscase, the only domain allowed to make a request is http://localhost:3000, which is the devlopment React app.
