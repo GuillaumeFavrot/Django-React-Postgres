@@ -1,8 +1,6 @@
 # DJANGO-REACT-POSTGRES Template
 
-# TEMPLATE SETUP PROCEDURE
-
-This setup procedure is suitable for a freshly cloned folder (from git) on a fresh machine.
+## TEMPLATE SETUP PROCEDURE
 
 REQUIREMENTS :
 
@@ -12,30 +10,28 @@ REQUIREMENTS :
 
 => NPM 8.19.2 OR LATER ;
 
-All other required packages and dependencies will be installed during the setup process. You'll find the full list of required packages in the requirement.txt and package.json files.
-
-
-# A - Environement setup
+### A - Environement setup
 
 Upon downloading of this template the first step is to ensure the correct environment is set up.
 
 
-A.1 - Django environement setup
+#### A.1 - Django environement setup
 
 It is highly recommended to use this app in a virtual environement to ensure a proper python dependency management :
 
 => Go in the main app directory and run the command :
 
-$ pip3 install pipenv       (if not already installed)
-
-$ pipenv shell
+```
+pip3 install pipenv       (if not already installed)
+pipenv shell
+```
 
 => Then install all the packages. The list of theses packages resides in the requirement.txt file (or Pifile see note). To install all packages from the requirement.txt file use the command :
 
 $ pipenv install -r ./requirements.txt
 
 
-A.2 - Javascript environement setup
+#### A.2 - Javascript environement setup
 
 All javascript dependencies are listed in the package.json file.
 
