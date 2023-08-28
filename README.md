@@ -1,18 +1,18 @@
-# ![#0c4b33]DJANGO-REACT-POSTGRES Template
+# DJANGO-REACT-POSTGRES Template `#0c4b33`
 
-## ![#0c4b33]TEMPLATE SETUP PROCEDURE
+## Template setup procedure `#0c4b33`
 
 Requirements :
 + PYTHON 3.1.12 or later ;
 + NODE.JS 18.17.1 or later ;
 + NPM 9.6.7 or later ;
 
-### ![#0c4b33]A - Environement setup
+### A - Environement setup `#0c4b33`
 
 Upon downloading of this template the first step is to ensure the correct environment is set up.
 
 
-#### ![#0c4b33]A.1 - Django environement setup
+#### A.1 - Django environement setup `#0c4b33`
 
 It is highly recommended to use this app in a virtual environement to ensure a proper python dependency management.
 
@@ -27,7 +27,7 @@ pipenv install -r ./requirements.txt
 ```
 
 
-#### ![#0c4b33]A.2 - Javascript environement setup
+#### A.2 - Javascript environement setup `#0c4b33`
 
 All javascript dependencies are listed in the package.json file.
 
@@ -37,7 +37,7 @@ In the frontend directory of the app run the following command :
 npn install
 ```
 
-#### ![#0c4b33]A.3 - Creating the .env file
+#### A.3 - Creating the .env file `#0c4b33`
 
 In the root directory of the app, create a .env file to store the following environment variables :
 
@@ -60,9 +60,9 @@ DATABASE_URL=postgresql://username:password@db:5432/dbname
 ```
 
 
-### ![#0c4b33]B - Launching a developpement environement
+### B - Launching a developpement environement `#0c4b33`
 
-#### ![#0c4b33]B.1 - Django
+#### B.1 - Django `#0c4b33`
 
 If the virtual environment is running, packages are installed and envirments variables are setup, launch Django's devlopment web-server with the following command
 
@@ -74,7 +74,7 @@ This command will launch the python server that will be avaiblable locally on th
 
 This Django template is configured to serve the React UI on the root address. However this requires to generate a react build and a staticfiles folder. See the section about generating a build for further instructions.
 
-##### ![#0c4b33]Django's administration interface
+##### Django's administration interface `#0c4b33`
 
 Django's administration interface is accessible on the following address : 127.0.0.1:8000/admin/
 
@@ -86,7 +86,7 @@ python manage.py createsuperuser
 
 This step however requires a working database. See database setup for further instructions.
 
-#### ![#0c4b33]B.2 - React
+#### B.2 - React `#0c4b33`
 
 To launch the react devlopment environment simply use the following command in the main directory :
 
