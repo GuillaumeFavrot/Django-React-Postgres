@@ -15,6 +15,7 @@ django = "==4.2.4"
 packaging = "==23.1"
 psycopg2-binary = "==2.9.7"
 typing-extensions = "==4.7.1"
+coverage = "*"
 
 [dev-packages]
 
