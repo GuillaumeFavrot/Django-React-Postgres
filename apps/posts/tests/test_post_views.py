@@ -3,7 +3,7 @@ from apps.posts.models import Post
 import json
 
 class PostCrudControllerTestCase(TestCase):
-    """This test class handles the testing of CRUD operations for posts."""
+    """This test class handles the integration of CRUD operations for posts."""
 
     def setUp(self) -> None:
         self.client = Client()
