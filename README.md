@@ -9,9 +9,6 @@ Requirements :
 
 ### A - Environement setup
 
-Upon downloading of this template the first step is to ensure the correct environment is set up.
-
-
 #### A.1 - Django environement setup
 
 It is highly recommended to use this app in a virtual environement to ensure a proper python dependency management.
@@ -50,76 +47,89 @@ ALLOWED_HOSTS=0.0.0.0 127.0.0.1
 
 # Database variables
 
-SQL_HOST=db
+SQL_HOST=db # This is the name of the DB container
 SQL_PORT=5432
 DATABASE=postgres
 POSTGRES_USER=username
 POSTGRES_PASSWORD=password
-POSTGRES_DB=dbname 
+POSTGRES_DB=dbname
 DATABASE_URL=postgresql://username:password@db:5432/dbname
 ```
 
 
-### B - Launching a developpement environement
+### B - Preparing and launching a developpement environement
 
 #### B.1 - Django
 
-If the virtual environment is running, packages are installed and envirments variables are setup, launch Django's devlopment web-server with the following command
+##### Creation of the database
+
+Before launching the Django devlopment environement the database must be created with the following commands :
 
 ```
-python3 manage.py runserver
+python3 manage.py makemigrations
+python3 manage.py migrate
 ```
 
-This command will launch the python server that will be avaiblable locally on the loopback address : 127.0.0.1:8000
+Note: Those commands will need to be reran each time app models are updated created or deleted.
 
-This Django template is configured to serve the React UI on the root address. However this requires to generate a react build and a staticfiles folder. See the section about generating a build for further instructions.
+##### Creation of the admin superuser
 
-##### Django's administration interface
-
-Django's administration interface is accessible on the following address : 127.0.0.1:8000/admin/
-
-In order to access it you first need to create a new superuser with the following command :
+In order to access Django's administration interface you first need to create a new superuser with the following command :
 
 ```
 python manage.py createsuperuser
 ```
 
-This step however requires a working database. See database setup for further instructions.
+This step requires a working database.
+
+
+##### Running the devlopment web-server
+
+Before launching DJango's web-server, please ensure :
++ The virtual environment is running, 
++ Packages are installed, 
++ Environments variables are setup, 
++ The DB has been created,
++ A superuser has been setup
+
+The launch Django's devlopment web-server with the following command
+
+```
+python3 manage.py runserver
+```
+
+This command will launch the python server that will be avaiblable locally on the loopback address :
+
+```
+127.0.0.1:8000/
+```
+
+Please note however that without creating a frontend build Django will have nothing to serve on the root address. This Django app template is configured to serve the React UI on the root address. However this requires to generate a react build and a staticfiles folder. See the section about generating a build for further instructions.
+
+Django's administration interface is accessible on the following address : 
+
+```
+127.0.0.1:8000/admin/
+```
 
 #### B.2 - React
 
 To launch the react devlopment environment simply use the following command in the main directory :
 
+```
 npm start
+```
 
-The React development environement has it's own webserver accessible via the adress :
+The React development environement has it's own webserver accessible via the adress : 
 
+```
 localhost:3000
+```
 
 
-# C - Creation of the .env file
+## UPDATING DEPENDENCIES
 
-This template requires two sets of environement variables, database variables and the DJANGO SECRET.
-
-=> Create a .env file at the root of the project ;
-
-=> Add the following DB variables :
-    "NAME": "mydatabase",
-    "USER": "mydatabaseuser",
-    "PASSWORD": "mypassword",
-    "HOST": "db", => This is the name of the DB container
-    "PORT": "5432",
-
-=> Generate and add a new Django secret key with the following syntaxe :
-
-SECRET_KEY=YOUR_SECRET_KEY
-
-Note : if a python virtual environement is running DJango may not detect the new .env file. To solve this issue kill the environement and launch it again.
-
-
-# UPDATING DEPENDENCIES
-
-# A. Python dependencies
+### A. Python dependencies
 
 If you wish to install new Django dependencies this requirement.txt file will NOT update itself automatically to update it use the following command :
 
