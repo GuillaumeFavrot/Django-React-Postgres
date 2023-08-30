@@ -85,14 +85,14 @@ This step requires a working database.
 
 ##### Running the devlopment web-server
 
-Before launching DJango's web-server, please ensure :
+Before launching Django's web-server, please ensure :
 + The virtual environment is running, 
 + Packages are installed, 
 + Environments variables are setup, 
 + The DB has been created,
 + A superuser has been setup
 
-The launch Django's devlopment web-server with the following command
+Launch Django's devlopment web-server with the following command :
 
 ```
 python3 manage.py runserver
@@ -120,202 +120,140 @@ To launch the react devlopment environment simply use the following command in t
 npm start
 ```
 
-The React development environement has it's own webserver accessible via the adress : 
+The React development environement has it's own webserver accessible via the address : 
 
 ```
 localhost:3000
 ```
 
 
-## UPDATING DEPENDENCIES
+## Updating dependencies and packages
 
 ### A. Python dependencies
 
-If you wish to install new Django dependencies this requirement.txt file will NOT update itself automatically to update it use the following command :
+The requirement.txt file lists all packages used in the app. However it does not update automatically when a new package is added.
 
-$ pip freeze > requirement.txt
+To add a new python package to the development environment use the following command :
 
-In the root folder of this template there are two files named Pipfile and Pipfile.lock. The standard Pipfile serves roughly the same purpose as the requirement.txt file for heroku. However the pipfile WILL take precedence so keep it up to date aswell. To update it copy the list of dependencies from the requirement.txt and paste it in the packages section of the pipfile. You must change the format of packages name :
-Packages names in requirement.txt : Django==4.0.6
-packages names in pipfile : Django="4.0.6"
+```
+pipenv install <name of the package>
+```
 
-To generate the Pipfile.lock that will be used by heroku use the following command :
+This will update the pipfile which lists all packages aswell.
 
-$ pipenv update
+However when building a docker image the the requirements.txt file is use for the the purpose of retrieving the list of packages.
 
-The requirement.txt and Pipfile.lock serves roughly the same purpose (for heroku) but the use of Pipfile.lock is considered a better practice.
+For this reason it is advised to update this file each time a new package is installed. To update this file use the following command :
 
+```
+pip freeze > requirement.txt
+```
 
-
-# B. Node dependencies
+### B. Node dependencies
 
 The package.json update itself automatically when new dependencies are installed.
 
+To install a Node dependency use the following command :
+
+```
+npm install <name of the dependency>
+```
+
+Some Node dependencies are only useful in devlopment. In order to avoid downloading those dependencies in a production context save them as dev dependecies :
+
+```
+npm install --save-dev <name of the dependency>
+```
+
+## Running tests
+
+This template comes with a complete suite of unit, intregration and e2e tests that covers both the frontend and the backend.
+
+### Django tests
+
+To run Django's test suite run the following command :
+```
+coverage run --source='.' manage.py test | coverage report
+```
+
+### React tests
+
+Reacts tests are seperated in two suites. One for unit and integration tests :
+```
+npm test
+```
+
+And one for e2e tests:
+```
+npm run test:e2e
+```
+
+By default all React files are included in the coverage report. However it may be useful to exclude some files from such reports. To do so add the following line at the top of the document you want excluded :
+```
+/* istanbul ignore file */
+```
+
+If a file has been deleted since the last test run, it is advised to clear the test cache in order to avoid error message in the test report. Clear the cache with the following command :
+```
+npm run test-clear-cache
+```
 
 
-# DESCRIPTION OF THE MAIN COMPONENTS OF THE APP
+## Docker image build procedure
 
-This section contains a brief decription of all part of the app. All file within those parts are commented so refer to those files for further instructions.
+This app template is built to be deployed as a group of containers. This procedure requires first to build the frontend then to create docker images using docker compose.
 
-
-
-# A. 'api' folder :
-
-This folder contains the main api of the app.  It's role is to handle http requests from the frontend, interrogate the DB and send a response back with required data. Its main components are :
-=> A routing file 'urls.py' ;
-=> A file used to setup mongoDB 'utils.py' and ;
-=> A file responsible for request handling annd db calls 'views.py'.
+### A. Creating a React build
 
 
+To create a react build go in the frontend folder and run the following command :
+```
+npm run build
+```
 
-# B. 'backend' folder :
+This command will bundle all the react code into static files and store them into a "build" folder in the frontend directory.
 
-This folder contains the backbone of the django app, the server. Its role is to listen for request on the urls of the app and route the traffic either to the frontend or to the api. Its main components are :
-=> A routing file 'urls.py' ;
-=> The main Django settings file 'settings.py'.
+### B. Generate Django's static files
 
-
-
-# C. 'node_modules' folder :
-
-This folder contains all the file of node modules and packages required for the JS side of the app (the frontend) to work. This file is excluded from github and is generated locally using the command '$ npm install' (see node.js setup section of the guide).
-
-This folder is auto generated based on the list of packages listed in the package.json file.
-
-
-
-# D. 'public' folder :
-
-This folder is one of the main component of a react app. Its main component is the 'index.html' file. This file served by the react developpement server of the Django server in production contains all the react app in its only div called the root.
-
-This file is usually not to be modified.
-
-
-
-# E. 'src' folder :
-
-This folder contains all the react JS logic of the app. Its main components are :
-=> The index.js file which is the main react JS file that links the App component to the index.html file and the Redux state manager ;
-=> The 'component' folder that contains all react and redux JS files (react components, redux store and redux slices) ;  
-=> The CSS folder that contains custom css files.
-
-This folder is only used in a devloppement environement. When switching in production and using the '$ npm run build' commmand (heroku does it automatically), the script will bundle all CSS and JS files and store them into a 'static' folder inside the public folder.
-
-
-
-# F. Loose files :
-
-=> .gitignore : This file lists all files and folder that  are to be left aside from git uploads.
-
-=> manage.py : This Django file contains mutliple scripts used to administrate a Django app. The main scripts (used in this template) are :
-- runserver : launch the django server ;
-- collectstatic : this script bundles all files into statics files that will be used by the app in production ;
-
-=> package.json and package-lock.json : Those are configuration files for any node.js app. They defines :
-- All packages the app needs
-- All npm scripts like '$ npm start' or 'npm run build'.
-
-=> requirements.txt, pipfile and pipfile.lock : Those files lists all python dependencies and packages required by the app to run. The pipfile files are generated from the requirement.txt file.
-
-=> runtime.txt : This file tells Heroku which version of python is used by the app.
-
-=> dockerfile : This file contains all the instructions required by docker to build a container image.
-
-=> .dockerignore : This file lists all files and folder to leave aside the image building process
+The second step is to generates static files that will be served by Django on the root app address. Go to the root derictory of the app and run the following command :
+```
+python3 manage.py collectstatic
+```
 
 
 
-
-# DOCKER IMAGE BUILDING PROCEDURE
-
-# A. Creating a live build
-
-Generating a manual live build is quite straight forward :
-=> The first step requires to naviguate with the console in the main directory and run the command :
-
-$ npm run build
-
-This command will bundle all the react code into static files and store them into a "build" folder in the root  directory.
-
-=> The second command generates static files used by the python side of the app. Make sure to be in a virtual environment AND in the root folder when you use this :
-
-$ python3 manage.py collectstatic
-
-This will generate a staticfiles folder a the root of the app using the content of the build folder generated by the previous operation. At this point the Django server will serve the React app on its root address (/) without the need to launch the react developement server.
-
-
-# B. Updating the dockerfile
-
-In order to move to a developpement build it's necessary to transfer the ENV variables to the container.
-
-To do this add them to the dockerfile between the line COPY and the line RUN :
-
-ENV SECRET_KEY=your_django_secret_key
-ENV MONGO_URI=your_mongo_uri
-
-
-# C. Building and running the image
+### C. Building and running the image
 
 The app is composed of two containers. The main app container and the nginx container. To launch both containers concurrently use the following command :
-
-$ docker-compose up -d
+```
+docker-compose up -d --build #docker-compose v1
+docker compose up -d --build #docker-compose v2
+```
 
 To bring the app down use this command :
 
-$ docker-compose down 
+```
+docker-compose down #docker-compose v1
+docker compose down #docker-compose v2
+```
+
+The process of build images and launching the app will automatically create the DB and all necessary tables.
+
+This app template comes with and optional adminer container available, once launched, at the following address:
+```
+localhost:8080
+```
+The login to this database explorer use the DB credentials defined ine your .env file.
 
 
-# MAKING MODEL CHANGES
+## Random tips
 
-1) Change your models in models.py
+#### Settings.py debug mode
 
-2) Run python manage.py makemigrations
++ The setting.py contain a DEBUG option that allows Django to display debug information in the browser when an app endpoint is accessed and an error is thrown.
 
-3) Run python manage.py migrate
+This option should be set to False in prodution.
 
-# REACT SPECIFIC DOCUMENTATION
+#### Removing Adminer for production
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
++ To remove Adminer simply remove is from the docker-compose file.
