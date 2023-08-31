@@ -31,7 +31,7 @@ All javascript dependencies are listed in the package.json file.
 In the frontend directory of the app run the following command :
 
 ```  
-npn install
+npm install
 ```
 
 #### A.3 - Creating the .env file
@@ -43,7 +43,7 @@ In the root directory of the app, create a .env file to store the following envi
 
 SECRET_KEY="your secret key"
 ALLOWED_ORIGINS=http://localhost:3000 http://127.0.0.1:3000 http://localhost:8000 http://127.0.0.1:8000 http://localhost
-ALLOWED_HOSTS=0.0.0.0 127.0.0.1
+ALLOWED_HOSTS=0.0.0.0 127.0.0.1 localhost
 
 # Database variables
 
@@ -176,12 +176,15 @@ To run Django's test suite run the following command :
 coverage run --source='.' manage.py test | coverage report
 ```
 
+Note: If you run theses tests on a freshy clone repository you may encounter a "missing staticfiles directory" error message. You can ignore it.
+
 ### React tests
 
 Reacts tests are seperated in two suites. One for unit and integration tests :
 ```
 npm test
 ```
+Note: React integration tests require a blank post Dev DB table. Some tests will fail if this table contain records before running the tests suite.  
 
 And one for e2e tests:
 ```
@@ -229,6 +232,13 @@ The app is composed of two containers. The main app container and the nginx cont
 docker-compose up -d --build #docker-compose v1
 docker compose up -d --build #docker-compose v2
 ```
+Once containers are running the app should be accessible at the following address:
+```
+localhost #(port 80 to go through nginx, 8000 to reach Django directly) or
+<IP of your machine>:80
+```
+Troubleshooting: By default Django's DEBUG mode is activated. If when trying to reach the aforementioned address you get a disallowed host error. This means you need to add the IP address of your machine to the list of allowed hosts in the .env file.
+
 
 To bring the app down use this command :
 
