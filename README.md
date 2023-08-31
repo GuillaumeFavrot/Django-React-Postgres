@@ -257,9 +257,9 @@ The login to this database explorer use the DB credentials defined ine your .env
 
 ### D. Creation of a superuser
 
-In order to create a Django superuser on the Postgres DB simply shell into the app container (or use docker exec) and run the command :
+In order to create a Django superuser on the Postgres DB and run the following command :
 ```
-python3 manage.py createsuperuser
+docker exec -it <ID of the app container> python3 manage.py createsuperuser
 ```
 
 
