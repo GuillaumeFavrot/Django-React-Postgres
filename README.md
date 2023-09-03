@@ -74,11 +74,14 @@ Note: Those commands will need to be reran each time app models are updated crea
 
 ##### Creation of the admin superuser
 
-In order to access Django's administration interface you first need to create a new superuser with the following command :
+In order to access Django's administration interface you first need to create a new admin user with the following command :
 
 ```
-python manage.py createsuperuser
+python manage.py initadmin
 ```
+You'll then be able to access the admin interface using the following credentials:
+username: admin
+password: admin
 
 This step requires a working database.
 
@@ -255,13 +258,13 @@ localhost:8080
 ```
 The login to this database explorer use the DB credentials defined ine your .env file.
 
-### D. Creation of a superuser
+### D.Admin account
 
-In order to create a Django superuser on the Postgres DB and run the following command :
-```
-docker exec -it <ID of the app container> python3 manage.py createsuperuser
-```
+An admin account is automatically created the first time the app is brought up. Credentials for this account are the following:
+username: admin
+password: admin
 
+Upon first login on the administrative area it is recommanded to create a new admin account and delete this default one.
 
 ## Random tips
 
