@@ -14,4 +14,4 @@ fi
 python manage.py migrate
 python manage.py makemigrations
 
-exec "$@"
+exec gunicorn backend.wsgi:application --bind 0.0.0.0:8000
