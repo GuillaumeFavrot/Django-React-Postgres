@@ -6,6 +6,7 @@ Requirements :
 + PYTHON 3.1.12 or later ;
 + NODE.JS 18.17.1 or later ;
 + NPM 9.6.7 or later ;
++ Docker engine ;
 
 ### A - Environement setup
 
