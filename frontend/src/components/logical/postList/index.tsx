@@ -12,7 +12,6 @@ export default function PostList() {
     //Get posts mutation hook setup
     const { data: posts, isLoading, isFetching, isSuccess, isError, error } = useGetPostsQuery()
 
-
     //useAppDispatch hook setup
     const dispatch = useAppDispatch()
     

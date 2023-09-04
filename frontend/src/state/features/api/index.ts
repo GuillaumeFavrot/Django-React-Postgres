@@ -7,9 +7,13 @@ let url = ''
   // Since React is also served by Django the correct URL is used.
   // However in development React runs on its own server so we have to specify the address (the Django server address) where requests have to be sent.
   // This section is generic and does not have to be modified.  
-if(process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
+if(process.env.NODE_ENV === 'development') {
   url = 'http://127.0.0.1:8000'
+} else if (process.env.NODE_ENV === 'test') {
+  url = 'https://drp.fakeapi.com'
 }
+
+
 
 // Define our single API slice object
 export const apiSlice = createApi({
@@ -49,7 +53,7 @@ export const apiSlice = createApi({
       query: (id: number) => ({
         url: `/posts/delete/`,
         method: 'DELETE',
-        body: id
+        body: {id}
       }),
       invalidatesTags: ['Post']
     })
