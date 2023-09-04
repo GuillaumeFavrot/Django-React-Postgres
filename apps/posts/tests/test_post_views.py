@@ -28,7 +28,7 @@ class PostCrudControllerTestCase(TestCase):
         self.assertEqual(self.post.text, 'Updated test post')
     
     def test_delete(self) -> None:
-        response = self.client.delete('/posts/delete/', json.dumps(self.post._id), content_type='application/json')
+        response = self.client.delete('/posts/delete/', json.dumps({"id" : self.post._id}), content_type='application/json')
         self.assertEqual(response.status_code, 200)
         self.assertEqual(Post.objects.count(), 0)
     

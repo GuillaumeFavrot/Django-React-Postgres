@@ -30,6 +30,7 @@ class post_crud_controller():
     @csrf_exempt
     def delete(request) -> HttpResponse:
         data = loads(request.body)
+        print(data)
         post = Post.objects.get(_id = data['id'])
         post.delete()
         return HttpResponse(status=200)
