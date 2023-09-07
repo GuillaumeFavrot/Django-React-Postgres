@@ -63,6 +63,18 @@ pipeline {
                 '''
             }
         }
+        stage('post-deployment') {
+            environment {
+                DOCKER_ID = 'guthan'
+                DOCKER_PASSWORD = credentials('docker-hub-password')
+            }
+            steps {
+                echo "Removal of all images"
+                sh '''
+                docker rmi $(docker images -a -q)
+                '''
+            }
+        }
     }
     post {
         // Clean after build
