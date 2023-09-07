@@ -26,8 +26,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --coverage --watchAll --transformIgnorePatterns 'node_modules/(?!axios)/' --testPathIgnorePatterns=src/tests/*e2e.test.ts",
-    "test:e2e": "react-scripts test --transformIgnorePatterns 'node_modules/(?!axios)/' --testPathPattern=src/tests/*e2e.test.ts$",
+    "test": "react-scripts test --coverage --watchAll  --no-watch --testPathIgnorePatterns=src/tests/*e2e.test.ts --forceExit --detectOpenHandles",
+    "test:e2e": "react-scripts test --testPathPattern=src/tests/*e2e.test.ts$  --forceExit --detectOpenHandles",
     "test-clear-cache": "react-scripts test --clearCache",
     "eject": "react-scripts eject"
   },
