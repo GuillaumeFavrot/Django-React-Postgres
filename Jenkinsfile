@@ -11,7 +11,6 @@ pipeline {
                 sh '''
                 cd frontend
                 npm install
-                npm run build
                 cd ..
                 pip3 install -r requirements.txt
                 '''
