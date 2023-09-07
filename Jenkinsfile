@@ -29,8 +29,7 @@ pipeline {
                 npm install
                 npm run build
                 cd ..
-                pipenv shell
-                pipenv install -r requirements.txt
+                pip3 install -r requirements.txt
                 python manage.py collectstatic
                 '''
             }
