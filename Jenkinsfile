@@ -67,8 +67,7 @@ pipeline {
             steps {
                 echo "Removal of all images"
                 sh '''
-                docker system prune -a -f
-                docker rmi $(docker images -a -q)
+                docker system prune -a
                 '''
             }
         }
