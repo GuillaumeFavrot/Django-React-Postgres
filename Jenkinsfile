@@ -50,13 +50,17 @@ pipeline {
         stage('Deploy') {
             environment {
                 DOCKER_ID = 'guthan'
-                DOCKER_PASSWORD = credentials('docker-password')
+                DOCKER_PASSWORD = credentials('docker-hub-password')
             }
             steps {
                 echo "Build ready to deploy!"
                 sh '''
                 docker -v
                 docker login -u $DOCKER_ID -p $DOCKER_PASSWORD
+                docker buildx create --use --platform=linux/arm64,linux/amd64 --name multi-platform-builder
+                docker buildx inspect --bootstrap
+                docker buildx build -t guthan/devblog-app --platform linux/arm64,linux/amd64 --push .
+                docker buildx build -t guthan/devblog-nginx --platform linux/arm64,linux/amd64 --push ./nignx
                 '''
             }
         }
