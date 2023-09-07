@@ -48,10 +48,15 @@ pipeline {
             }
         }
         stage('Deploy') {
+            environment {
+                DOCKER_ID = 'guthan'
+                DOCKER_PASSWORD = credentials('docker-password')
+            }
             steps {
                 echo "Build ready to deploy!"
                 sh '''
                 docker -v
+                docker login -u $DOCKER_ID -p $DOCKER_PASSWORD
                 '''
             }
         }
