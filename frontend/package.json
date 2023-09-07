@@ -26,7 +26,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --coverage --watchAll  --no-watch --testPathIgnorePatterns=src/tests/*e2e.test.ts --forceExit --detectOpenHandles",
+    "test": "react-scripts test --coverage --testPathIgnorePatterns=src/tests/*e2e.test.ts --forceExit --detectOpenHandles",
     "test:e2e": "react-scripts test --testPathPattern=src/tests/*e2e.test.ts$  --forceExit --detectOpenHandles",
     "test-clear-cache": "react-scripts test --clearCache",
     "eject": "react-scripts eject"
