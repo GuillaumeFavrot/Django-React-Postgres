@@ -50,6 +50,9 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo "Build ready to deploy!"
+                sh '''
+                docker -v
+                '''
             }
         }
     }
