@@ -42,5 +42,10 @@ pipeline {
                 '''
             }
         }
+        stage('Deploy') {
+            steps {
+                echo "Build ready to deploy!"
+            }
+        }
     }
 }
