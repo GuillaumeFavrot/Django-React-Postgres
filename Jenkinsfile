@@ -30,7 +30,7 @@ pipeline {
                 npm run build
                 cd ..
                 pip3 install -r requirements.txt
-                python3 manage.py collectstatic -y --noinput
+                python3 manage.py collectstatic --noinput
                 '''
             }
         }
