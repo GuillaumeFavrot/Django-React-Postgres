@@ -5,7 +5,6 @@ pipeline {
             }
     }
     environment {
-        CI = 'false'
         ALLOWED_ORIGINS="http://localhost:3000 http://127.0.0.1:3000 http://localhost:8000 http://127.0.0.1:8000 http://localhost"
         ALLOWED_HOSTS="*"
         SQL_HOST='db'
@@ -20,6 +19,9 @@ pipeline {
     }
     stages {
         stage('Build') {
+            environment {
+                CI = 'false'  
+            }
             steps {
                 echo "Building..."
                 sh '''
@@ -33,6 +35,9 @@ pipeline {
             }
         }
         stage('Test') {
+            environment {
+                CI = 'true'  
+            }
             steps {
                 echo "Testing.."
                 sh '''
