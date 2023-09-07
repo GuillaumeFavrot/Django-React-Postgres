@@ -36,7 +36,7 @@ pipeline {
             steps {
                 echo "Testing.."
                 sh '''
-                coverage run --source='.' manage.py test | coverage report
+                python manage.py test
                 cd frontend
                 npm test
                 '''
