@@ -30,7 +30,7 @@ pipeline {
                 npm run build
                 cd ..
                 pip3 install -r requirements.txt
-                python manage.py collectstatic
+                python3 manage.py collectstatic
                 '''
             }
         }
@@ -41,7 +41,7 @@ pipeline {
             steps {
                 echo "Testing.."
                 sh '''
-                python manage.py test
+                python3 manage.py test
                 cd frontend
                 npm test
                 '''
