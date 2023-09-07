@@ -57,7 +57,7 @@ pipeline {
                 sh '''
                 docker -v
                 docker login -u $DOCKER_ID -p $DOCKER_PASSWORD
-                docker buildx create --platform=linux/arm64,linux/amd64 --name multi-platform-builder
+                docker buildx create --use --platform=linux/arm64,linux/amd64 --name multi-platform-builder
                 docker buildx inspect --bootstrap
                 docker buildx build -t guthan/devblog-app --platform linux/arm64,linux/amd64 --push .
                 docker buildx build -t guthan/devblog-nginx --platform linux/arm64,linux/amd64 --push ./nignx
