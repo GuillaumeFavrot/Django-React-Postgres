@@ -11,7 +11,7 @@ export default function Main() {
 			
 				<div className="bg-slate-500 max-w-lg card">
 				
-					<h1 className='card-title' aria-label='main-title'>API Tester</h1>
+					<h1 className='card-title' aria-label='main-title'>API Testerzzz</h1>
 					
 					<hr />
 					
